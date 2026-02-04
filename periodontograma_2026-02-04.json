@@ -1,0 +1,1698 @@
+{
+  "18": {
+    "ausente": true,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "17": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "16": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "15": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "14": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "13": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "12": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "11": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "21": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        1
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        2,
+        0
+      ]
+    }
+  },
+  "22": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "23": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "24": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "25": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "26": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "27": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "28": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "38": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "37": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "36": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "35": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "34": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "33": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "32": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "31": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "41": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "42": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "43": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "44": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "45": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "46": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "47": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "48": {
+    "ausente": false,
+    "implante": false,
+    "movilidad": 0,
+    "vestibular": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    },
+    "palatino": {
+      "furca": 0,
+      "sangrado": [
+        false,
+        false,
+        false
+      ],
+      "placa": [
+        false,
+        false,
+        false
+      ],
+      "anchura_encia": 0,
+      "margen_gingival": [
+        0,
+        0,
+        0
+      ],
+      "profundidad_sondaje": [
+        0,
+        0,
+        0
+      ]
+    }
+  }
+}

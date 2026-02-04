@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Periodontograma</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1400px;
+    margin: auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.main-content {
+    padding: 30px;
+    background: #f8f9fa;
+}
+
+/* ================= PERIODONTOGRAMA ================= */
+
+.arcada {
+    margin-bottom: 40px;
+}
+
+.arcada-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.cuadrantes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.dientes-container {
+    display: flex;
+    gap: 4px;
+}
+
+.diente {
+    width: 70px;
+    text-align: center;
+}
+
+.valores-vestibular,
+.valores-palatino {
+    display: flex;
+    justify-content: space-between;
+    height: 25px;
+}
+
+.valor {
+    width: 20px;
+    height: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eee;
+    border-radius: 3px;
+}
+
+.valor.filled { background: #4CAF50; color: white; }
+.valor.warning { background: #FF9800; }
+.valor.danger  { background: #f44336; }
+
+.diente-box {
+    border: 2px solid #333;
+    margin: 4px 0;
+    padding: 6px 4px;
+    border-radius: 5px;
+    min-height: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.diente-box.ausente {
+    background: #ddd;
+    border-style: dashed;
+    opacity: 0.6;
+}
+
+.numero-diente { font-weight: bold; }
+.extra-info { font-size: 10px; color: #666; }
+
+/* ================= LEYENDA ================= */
+
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.legend-color {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🦷 Periodontograma</h1>
+    </div>
+
+    <div class="main-content">
+
+        <!-- ARCADA SUPERIOR -->
+        <div class="arcada">
+            <div class="arcada-title">ARCADA SUPERIOR</div>
+            <div class="cuadrantes">
+                <div class="dientes-container" id="arcada-superior-izquierda"></div>
+                <div class="dientes-container" id="arcada-superior-derecha"></div>
+            </div>
+        </div>
+
+        <!-- ARCADA INFERIOR -->
+        <div class="arcada">
+            <div class="arcada-title">ARCADA INFERIOR</div>
+            <div class="cuadrantes">
+                <div class="dientes-container" id="arcada-inferior-izquierda"></div>
+                <div class="dientes-container" id="arcada-inferior-derecha"></div>
+            </div>
+        </div>
+
+        <!-- LEYENDA -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background:#4CAF50"></div>
+                Normal (1–3mm)
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background:#FF9800"></div>
+                Moderado (4–5mm)
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background:#f44336"></div>
+                Severo (6+mm)
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+const dientes = {};
+
+const supIzq = [18,17,16,15,14,13,12,11];
+const supDer = [21,22,23,24,25,26,27,28];
+
+const infIzq = [48,47,46,45,44,43,42,41];
+const infDer = [31,32,33,34,35,36,37,38];
+
+function inicializarDientes() {
+    [...supIzq, ...supDer, ...infIzq, ...infDer].forEach(n => {
+        dientes[n] = {
+            vestibular: [0,0,0],
+            palatino: [0,0,0],
+            movilidad: 0,
+            ausente: false,
+            implante: false
+        };
+    });
+}
+
+function crearDienteHTML(numero) {
+    return `
+    <div class="diente">
+        <div class="valores-vestibular">
+            <div class="valor" id="${numero}-v-0"></div>
+            <div class="valor" id="${numero}-v-1"></div>
+            <div class="valor" id="${numero}-v-2"></div>
+        </div>
+
+        <div class="diente-box" id="box-${numero}">
+            <div class="numero-diente">${numero}</div>
+            <div class="extra-info" id="info-${numero}"></div>
+        </div>
+
+        <div class="valores-palatino">
+            <div class="valor" id="${numero}-p-0"></div>
+            <div class="valor" id="${numero}-p-1"></div>
+            <div class="valor" id="${numero}-p-2"></div>
+        </div>
+    </div>`;
+}
+
+function renderizar(lista, contenedor) {
+    document.getElementById(contenedor).innerHTML =
+        lista.map(crearDienteHTML).join("");
+}
+
+function actualizarValor(diente, cara, pos, valor) {
+    const pref = cara === "vestibular" ? "v" : "p";
+    const el = document.getElementById(`${diente}-${pref}-${pos}`);
+    el.textContent = valor;
+    el.classList.add("filled");
+    if (valor >= 6) el.classList.add("danger");
+    else if (valor >= 4) el.classList.add("warning");
+}
+
+async function cargarPeriodontogramaDesdeJSON(id) {
+    const res = await fetch(`Data/periodontograma_${id}.json`);
+    const data = await res.json();
+
+    Object.entries(data).forEach(([num, d]) => {
+        if (d.ausente) {
+            document.getElementById(`box-${num}`)?.classList.add("ausente");
+            return;
+        }
+
+        if (d.movilidad > 0) {
+            document.getElementById(`info-${num}`).textContent = `M${d.movilidad}`;
+        }
+
+        d.vestibular?.profundidad_sondaje?.forEach((v,i)=>{
+            if (v>0) actualizarValor(num,"vestibular",i,v);
+        });
+
+        d.palatino?.profundidad_sondaje?.forEach((v,i)=>{
+            if (v>0) actualizarValor(num,"palatino",i,v);
+        });
+    });
+}
+
+window.onload = () => {
+    inicializarDientes();
+    renderizar(supIzq,"arcada-superior-izquierda");
+    renderizar(supDer,"arcada-superior-derecha");
+    renderizar(infIzq,"arcada-inferior-izquierda");
+    renderizar(infDer,"arcada-inferior-derecha");
+    cargarPeriodontogramaDesdeJSON("2026-02-04");
+};
+</script>
+
+</body>
+</html>
