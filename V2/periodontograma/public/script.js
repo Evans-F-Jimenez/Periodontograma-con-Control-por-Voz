@@ -107,12 +107,10 @@ function crearDienteHTML(numero) {
     </div>`;
 }
 
-function renderizar(lista, contenedor, invertida = false) {
-  const dientes = invertida ? [...lista].reverse() : lista;
-  
-  document.getElementById(contenedor).innerHTML = dientes
+function renderizar(lista, contenedor) {
+  document.getElementById(contenedor).innerHTML = lista
     .map((num) => {
-      const mostrarNombres = num === 18 || num === 48; // solo dientes más a la izquierda
+      const mostrarNombres = num === 18 || num === 48; // solo dientes a la izquierda
       return crearDienteHTML(num, mostrarNombres);
     })
     .join("");
