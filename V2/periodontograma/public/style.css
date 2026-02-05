@@ -161,3 +161,17 @@ body {
     height: 18px;
     border-radius: 3px;
 }
+
+/* Arcada superior: normal */
+#arcada-superior-izquierda .diente,
+#arcada-superior-derecha .diente {
+  display: flex;
+  flex-direction: column; /* filas de arriba hacia abajo */
+}
+
+/* Arcada inferior: invertida verticalmente */
+#arcada-inferior-izquierda .diente,
+#arcada-inferior-derecha .diente {
+  display: flex;
+  flex-direction: column-reverse; /* filas de abajo hacia arriba */
+}

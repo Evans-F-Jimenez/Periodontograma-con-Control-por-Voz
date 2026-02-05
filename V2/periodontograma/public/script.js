@@ -107,11 +107,17 @@ function crearDienteHTML(numero) {
     </div>`;
 }
 
-function renderizar(lista, contenedor) {
-  document.getElementById(contenedor).innerHTML = lista
-    .map(crearDienteHTML)
+function renderizar(lista, contenedor, invertida = false) {
+  const dientes = invertida ? [...lista].reverse() : lista;
+  
+  document.getElementById(contenedor).innerHTML = dientes
+    .map((num) => {
+      const mostrarNombres = num === 18 || num === 48; // solo dientes más a la izquierda
+      return crearDienteHTML(num, mostrarNombres);
+    })
     .join("");
 }
+
 
 function actualizarValor(diente, cara, pos, valor) {
   const pref = cara === "vestibular" ? "v" : "p";
@@ -148,9 +154,15 @@ async function cargarPeriodontogramaDesdeJSON(id) {
 
 window.onload = () => {
   inicializarDientes();
+
+  // Arcada superior normal
   renderizar(supIzq, "arcada-superior-izquierda");
   renderizar(supDer, "arcada-superior-derecha");
-  renderizar(infIzq, "arcada-inferior-izquierda");
-  renderizar(infDer, "arcada-inferior-derecha");
+
+  // Arcada inferior invertida
+  renderizar(infIzq, "arcada-inferior-izquierda", true);
+  renderizar(infDer, "arcada-inferior-derecha", true);
+
   cargarPeriodontogramaDesdeJSON("2026-02-04");
+
 };
