@@ -1,3 +1,6 @@
+let ultimoSnapshot = null;
+let periodontogramaId = "2026-02-05";
+
 const dientes = {};
 
 const supIzq = [18, 17, 16, 15, 14, 13, 12, 11];
@@ -173,32 +176,46 @@ function ocultarFilasDiente(num) {
   });
 }
 
-async function cargarPeriodontogramaDesdeJSON(id) {
-  const res = await fetch(`Data/periodontograma_${id}.json`);
-  const data = await res.json();
+async function refrescarPeriodontograma() {
+  try {
+    const res = await fetch(
+      `Data/periodontograma_${periodontogramaId}.json?ts=${Date.now()}`,
+      { cache: "no-store" }
+    );
+    const data = await res.json();
 
+    const snapshot = JSON.stringify(data);
+
+    if (snapshot !== ultimoSnapshot) {
+      console.log("🔄 Cambios detectados en JSON");
+      ultimoSnapshot = snapshot;
+
+      limpiarPeriodontograma();
+      cargarPeriodontogramaDesdeObjeto(data);
+    }
+
+  } catch (err) {
+    console.error("Error al refrescar periodontograma", err);
+  }
+}
+
+
+function cargarPeriodontogramaDesdeObjeto(data) {
   Object.entries(data).forEach(([num, d]) => {
-    // AUSENTE
+
     if (d.ausente) {
       ocultarFilasDiente(num);
       return;
     }
 
-    if (d.ausente && d.implante) {
-      console.warn(`Diente ${num}: no puede ser ausente e implante`);
-    }
-
-    // IMPLANTE
     if (d.implante) {
       marcarImplante(num);
     }
 
-    // MOVILIDAD
     if (d.movilidad > 0) {
       setInputValue(`${num}-movilidad`, d.movilidad);
     }
 
-    // VESTIBULAR
     d.vestibular?.profundidadSondaje?.forEach((v, i) => {
       if (v > 0) setInputValue(`${num}-psv-${i}`, v);
     });
@@ -207,11 +224,6 @@ async function cargarPeriodontogramaDesdeJSON(id) {
       if (v !== 0) setInputValue(`${num}-mgv-${i}`, v);
     });
 
-    if (d.vestibular?.furca > 0) {
-      setInputValue(`${num}-furca_v`, d.vestibular.furca);
-    }
-
-    // PALATINO
     d.palatino?.profundidadSondaje?.forEach((v, i) => {
       if (v > 0) setInputValue(`${num}-psp-${i}`, v);
     });
@@ -219,12 +231,27 @@ async function cargarPeriodontogramaDesdeJSON(id) {
     d.palatino?.margenGingival?.forEach((v, i) => {
       if (v !== 0) setInputValue(`${num}-mgp-${i}`, v);
     });
-
-    if (d.palatino?.furca > 0) {
-      setInputValue(`${num}-furca_p`, d.palatino.furca);
-    }
   });
 }
+
+function limpiarPeriodontograma() {
+  document.querySelectorAll("input.campo, input.campo.unico").forEach(i => {
+    i.value = "";
+    i.classList.remove("filled", "danger", "warning");
+  });
+
+  document.querySelectorAll(".diente-box").forEach(box => {
+    box.classList.remove("implante");
+  });
+
+  document.querySelectorAll(".extra-info").forEach(i => i.textContent = "");
+
+  document.querySelectorAll(".diente").forEach(d => {
+    d.classList.remove("ausente");
+    [...d.children].forEach(c => c.style.display = "");
+  });
+}
+
 
 window.onload = () => {
   inicializarDientes();
@@ -237,5 +264,8 @@ window.onload = () => {
   renderizar(infIzq, "arcada-inferior-izquierda", true);
   renderizar(infDer, "arcada-inferior-derecha", true);
 
-  cargarPeriodontogramaDesdeJSON("2026-02-05");
+  refrescarPeriodontograma();
+
+  // 🔄 refresco cada 2 segundos (ajustable)
+  // setInterval(refrescarPeriodontograma, 2000);
 };
