@@ -61,6 +61,23 @@ body {
     text-align: center;
 }
 
+.diente-box.implante {
+  border: 1px solid #333;
+  background: #e3f2fd;
+  font-size: 6px;
+}
+
+.diente-box.implante .numero-diente {
+  font-weight: bold;
+}
+
+.diente-box.implante::after {
+  top: -1px;
+  right: -7px;
+  font-size: 1px;
+}
+
+
 .valores-sangrado,
 .valores-placa {
     display: flex;
@@ -100,6 +117,15 @@ body {
     border-style: dashed;
     opacity: 0.6;
 }
+
+.diente.ausente {
+  opacity: 0.4;
+}
+
+.diente.ausente .numero-diente {
+  text-decoration: line-through;
+}
+
 
 
 .numero-diente { font-weight: bold; }
