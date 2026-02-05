@@ -129,7 +129,7 @@ body {
 }
 
 .campo.unico {
-    width: 26px;
+    width: 30px;
 }
 
 .campo.filled {
@@ -139,6 +139,13 @@ body {
 
 .campo.warning { background: #FF9800; }
 .campo.danger  { background: #f44336; }
+
+input.center-text {
+            text-align: center;   /* Centers the text horizontally */
+            padding: 8px;
+            font-size: 12px;
+            width: 200px;
+        }
 
 /* ================= LEYENDA ================= */
 

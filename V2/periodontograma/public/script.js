@@ -22,27 +22,35 @@ function crearDienteHTML(numero) {
   return `
     <div class="diente">
 
-    <div class="fila">
-            <div class="campo unico" id="${numero}-movilidad"></div>
+       <!-- MOVILIDAD -->
+        <div class="fila">
+           <!-- <div class="campo unico" id="${numero}-movilidad"></div> -->
+            <input class="campo unico center-text" type="text" maxlength="1" id="${numero}-movilidad" name="movilidad-${numero}">
         </div>
 
+        <!-- FURCA -->
         <div class="fila">
-            <div class="campo unico" id="${numero}-furca"></div>
+            <!--<div class="campo unico" id="${numero}-furca"></div> -->
+            <input class="campo unico center-text" type="text" id="${numero}-furca" name="furca-${numero}">
         </div>
+
+        <!-- SANGRADO -->
         <div class="valores-sangrado">
             <div class="valor" id="${numero}-v-0"></div>
             <div class="valor" id="${numero}-v-1"></div>
             <div class="valor" id="${numero}-v-2"></div>
         </div>
 
+        <!-- PLACA -->
         <div class="valores-placa">
             <div class="valor" id="${numero}-p-0"></div>
             <div class="valor" id="${numero}-p-1"></div>
             <div class="valor" id="${numero}-p-2"></div>
         </div>
-
+        
+        <!-- ANCHURA DE ENCIA -->
         <div class="fila">
-            <div class="campo unico" id="${numero}-anchura_encia"></div>
+            <input class="campo unico" type="text" id="${numero}-anchura_encia" name="anchura_e">
         </div>
 
         <!-- MARGEN GINGIVAL -->
@@ -59,6 +67,7 @@ function crearDienteHTML(numero) {
             <div class="campo" id="${numero}-v-2"></div>
         </div>
 
+        <!-- NIC -->
          <div class="fila triple">
             <div class="campo" id="${numero}-N-0"></div>
             <div class="campo" id="${numero}-N-1"></div>
