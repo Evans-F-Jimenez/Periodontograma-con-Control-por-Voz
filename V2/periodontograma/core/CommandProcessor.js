@@ -11,7 +11,7 @@ class CommandProcessor {
 
     procesar(texto) {
         if (!texto) return false;
-        texto = texto.toLowerCase().trim();
+        texto = texto.toLowerCase().trim().replace(/,/g, '').replace(/ /g, '');
 
         // ---------- COMANDO SALIR ----------
         if (["salir","terminar","finalizar","cerrar"].some(p => texto.includes(p))) {
