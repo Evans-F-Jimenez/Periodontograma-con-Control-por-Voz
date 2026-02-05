@@ -90,11 +90,12 @@ body {
 
 .diente.ausente {
   opacity: 0.45;
-}
-
-.diente.ausente .numero-diente {
   text-decoration: line-through;
 }
+
+/* .diente.ausente {
+  text-decoration: line-through;
+} */
 
 
 .valores-sangrado,
