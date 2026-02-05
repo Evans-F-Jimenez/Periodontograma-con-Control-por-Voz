@@ -130,38 +130,77 @@ function renderizar(lista, contenedor) {
 }
 
 
-function actualizarValor(diente, cara, pos, valor) {
-  const pref = cara === "vestibular" ? "v" : "p";
-  const el = document.getElementById(`${diente}-${pref}-${pos}`);
-  el.textContent = valor;
+// function actualizarValor(diente, cara, pos, valor) {
+//   const pref = cara === "vestibular" ? "v" : "p";
+//   const el = document.getElementById(`${diente}-${pref}-${pos}`);
+//   el.textContent = valor;
+//   el.classList.add("filled");
+//   if (valor >= 6) el.classList.add("danger");
+//   else if (valor >= 4) el.classList.add("warning");
+// }
+
+function setInputValue(id, valor) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.value = valor;
   el.classList.add("filled");
-  if (valor >= 6) el.classList.add("danger");
-  else if (valor >= 4) el.classList.add("warning");
+
+  if (Number(valor) >= 6) el.classList.add("danger");
+  else if (Number(valor) >= 4) el.classList.add("warning");
 }
+
+
+
 
 async function cargarPeriodontogramaDesdeJSON(id) {
   const res = await fetch(`Data/periodontograma_${id}.json`);
   const data = await res.json();
 
   Object.entries(data).forEach(([num, d]) => {
+
     if (d.ausente) {
       document.getElementById(`box-${num}`)?.classList.add("ausente");
       return;
     }
 
+    // Movilidad
     if (d.movilidad > 0) {
-      document.getElementById(`info-${num}`).textContent = `M${d.movilidad}`;
+      document.getElementById(`${num}-movilidad`).value = d.movilidad;
     }
 
-    d.vestibular?.profundidad_sondaje?.forEach((v, i) => {
-      if (v > 0) actualizarValor(num, "vestibular", i, v);
+    // -------- VESTIBULAR --------
+    d.vestibular?.profundidadSondaje?.forEach((v, i) => {
+      if (v > 0) setInputValue(`${num}-psv-${i}`, v);
     });
 
-    d.palatino?.profundidad_sondaje?.forEach((v, i) => {
-      if (v > 0) actualizarValor(num, "palatino", i, v);
+    d.vestibular?.margenGingival?.forEach((v, i) => {
+      if (v !== 0) setInputValue(`${num}-mgv-${i}`, v);
     });
+
+    if (d.vestibular?.furca > 0) {
+      setInputValue(`${num}-furca_v`, d.vestibular.furca);
+    }
+
+    if (d.vestibular?.anchuraEncia > 0) {
+      setInputValue(`${num}-anchura_encia`, d.vestibular.anchuraEncia);
+    }
+
+    // -------- PALATINO --------
+    d.palatino?.profundidadSondaje?.forEach((v, i) => {
+      if (v > 0) setInputValue(`${num}-psp-${i}`, v);
+    });
+
+    d.palatino?.margenGingival?.forEach((v, i) => {
+      if (v !== 0) setInputValue(`${num}-mgp-${i}`, v);
+    });
+
+    if (d.palatino?.furca > 0) {
+      setInputValue(`${num}-furca_p`, d.palatino.furca);
+    }
+
   });
 }
+
 
 window.onload = () => {
   inicializarDientes();
@@ -174,6 +213,6 @@ window.onload = () => {
   renderizar(infIzq, "arcada-inferior-izquierda", true);
   renderizar(infDer, "arcada-inferior-derecha", true);
 
-  cargarPeriodontogramaDesdeJSON("2026-02-04");
+  cargarPeriodontogramaDesdeJSON("2026-02-05");
 
 };
