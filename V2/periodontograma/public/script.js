@@ -176,6 +176,16 @@ function ocultarFilasDiente(num) {
   });
 }
 
+function marcarAusente(num) {
+  const diente = document
+    .getElementById(`box-${num}`)
+    ?.closest(".diente");
+
+  if (!diente) return;
+
+  diente.classList.add("ausente");
+}
+
 async function refrescarPeriodontograma() {
   try {
     const res = await fetch(
@@ -203,10 +213,15 @@ async function refrescarPeriodontograma() {
 function cargarPeriodontogramaDesdeObjeto(data) {
   Object.entries(data).forEach(([num, d]) => {
 
+    // if (d.ausente) {
+    //   ocultarFilasDiente(num);
+    //   return;
+    // }
+
     if (d.ausente) {
-      ocultarFilasDiente(num);
-      return;
-    }
+  marcarAusente(num);
+  return;
+}
 
     if (d.implante) {
       marcarImplante(num);

@@ -77,6 +77,25 @@ body {
   font-size: 1px;
 }
 
+.diente.ausente .fila,
+.diente.ausente .valores-sangrado,
+.diente.ausente .valores-placa {
+  visibility: hidden;     /* oculta */
+  pointer-events: none;
+}
+
+.diente.ausente .diente-box {
+  visibility: visible;    /* se mantiene */
+}
+
+.diente.ausente {
+  opacity: 0.45;
+}
+
+.diente.ausente .numero-diente {
+  text-decoration: line-through;
+}
+
 
 .valores-sangrado,
 .valores-placa {
@@ -111,22 +130,6 @@ body {
     flex-direction: column;
     justify-content: center;
 }
-
-.diente-box.ausente {
-    background: #ddd;
-    border-style: dashed;
-    opacity: 0.6;
-}
-
-.diente.ausente {
-  opacity: 0.4;
-}
-
-.diente.ausente .numero-diente {
-  text-decoration: line-through;
-}
-
-
 
 .numero-diente { font-weight: bold; }
 .extra-info { font-size: 10px; color: #666; }
