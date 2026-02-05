@@ -15,7 +15,7 @@ body {
     max-width: 1400px;
     margin: auto;
     background: white;
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     overflow: hidden;
 }
@@ -23,7 +23,7 @@ body {
 .header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 30px;
+    padding: 15px;
     text-align: center;
 }
 
@@ -61,8 +61,8 @@ body {
     text-align: center;
 }
 
-.valores-vestibular,
-.valores-palatino {
+.valores-sangrado,
+.valores-placa {
     display: flex;
     justify-content: space-between;
     height: 25px;
@@ -85,11 +85,11 @@ body {
 .valor.danger  { background: #f44336; }
 
 .diente-box {
-    border: 2px solid #333;
+    border: 1px solid #333;
     margin: 4px 0;
-    padding: 6px 4px;
-    border-radius: 5px;
-    min-height: 45px;
+    padding: 3px 1px;
+    border-radius: 2px;
+    min-height: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -101,8 +101,44 @@ body {
     opacity: 0.6;
 }
 
+
 .numero-diente { font-weight: bold; }
 .extra-info { font-size: 10px; color: #666; }
+
+.fila {
+    border-top: 1px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 22px;
+}
+
+.fila.triple {
+    gap: 2px;
+}
+
+.campo {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.campo.unico {
+    width: 26px;
+}
+
+.campo.filled {
+    background: #4CAF50;
+    color: white;
+}
+
+.campo.warning { background: #FF9800; }
+.campo.danger  { background: #f44336; }
 
 /* ================= LEYENDA ================= */
 
