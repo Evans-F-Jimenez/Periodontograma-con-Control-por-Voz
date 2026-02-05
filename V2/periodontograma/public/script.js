@@ -25,13 +25,15 @@ function crearDienteHTML(numero) {
        <!-- MOVILIDAD -->
         <div class="fila">
            <!-- <div class="campo unico" id="${numero}-movilidad"></div> -->
-            <input class="campo unico center-text" type="text" maxlength="1" id="${numero}-movilidad" name="movilidad-${numero}">
+            <input class="campo unico" type="text" maxlength="1" id="${numero}-movilidad" name="movilidad-${numero}">
         </div>
+
+        <!-- VESTIBULAR -->
 
         <!-- FURCA -->
         <div class="fila">
             <!--<div class="campo unico" id="${numero}-furca"></div> -->
-            <input class="campo unico center-text" type="text" id="${numero}-furca" name="furca-${numero}">
+            <input class="campo unico" type="text" maxlength="1" id="${numero}-furca_v" name="furca-${numero}">
         </div>
 
         <!-- SANGRADO -->
@@ -50,51 +52,53 @@ function crearDienteHTML(numero) {
         
         <!-- ANCHURA DE ENCIA -->
         <div class="fila">
-            <input class="campo unico" type="text" id="${numero}-anchura_encia" name="anchura_e">
+            <input class="campo unico" type="text"  maxlength="1" id="${numero}-anchura_encia" name="anchura_e">
         </div>
 
         <!-- MARGEN GINGIVAL -->
         <div class="fila triple">
-            <div class="campo" id="${numero}-mg-0"></div>
-            <div class="campo" id="${numero}-mg-1"></div>
-            <div class="campo" id="${numero}-mg-2"></div>
+            <!--<div class="campo" id="${numero}-mg-0"></div>-->
+            <input class="campo" type="text"  maxlength="1" id="${numero}-mgv-0" name="margen_gingival-${numero}">
+            <input class="campo" type="text"  maxlength="1" id="${numero}-mgv-1" name="margen_gingival-${numero}">
+            <input class="campo" type="text"  maxlength="1" id="${numero}-mgv-2" name="margen_gingival-${numero}">
         </div>
 
         <!-- PROFUNDIDAD VESTIBULAR -->
         <div class="fila triple">
-            <div class="campo" id="${numero}-v-0"></div>
-            <div class="campo" id="${numero}-v-1"></div>
-            <div class="campo" id="${numero}-v-2"></div>
+            <input class="campo" type="text"  maxlength="1" id="${numero}-psv-0" name="profundidad_vestibular-${numero}">
+            <input class="campo" type="text"  maxlength="1" id="${numero}-psv-1" name="profundidad_vestibular-${numero}">
+            <input class="campo" type="text"  maxlength="1" id="${numero}-psv-2" name="profundidad_vestibular-${numero}">
         </div>
 
         <!-- NIC -->
          <div class="fila triple">
-            <div class="campo" id="${numero}-N-0"></div>
-            <div class="campo" id="${numero}-N-1"></div>
-            <div class="campo" id="${numero}-N-2"></div>
+            <input class="campo" type="text"  maxlength="1" id="${numero}-NV-0" name="nic-${numero}">
+            <input class="campo" type="text"  maxlength="1" id="${numero}-NV-1" name="nic-${numero}">
+            <input class="campo" type="text"  maxlength="1" id="${numero}-NV-2" name="nic-${numero}">
         </div>
 
         <div class="diente-box" id="box-${numero}">
             <div class="numero-diente">${numero}</div>
             <div class="extra-info" id="info-${numero}"></div>
         </div>
-
+        
+<!-- PALATINO -->
         <div class="fila triple">
-            <div class="campo" id="${numero}-N-0"></div>
-            <div class="campo" id="${numero}-N-1"></div>
-            <div class="campo" id="${numero}-N-2"></div>
+            <input class="campo" type="text"  maxlength="1" id="${numero}-NP-0" name="nic-${numero}">
+            <input class="campo" type="text"  maxlength="1" id="${numero}-NP-1" name="nic-${numero}">
+            <input class="campo" type="text"  maxlength="1" id="${numero}-NP-2" name="nic-${numero}">
         </div>
 
         <div class="fila triple">
-            <div class="campo" id="${numero}-pp-0"></div>
-            <div class="campo" id="${numero}-pp-1"></div>
-            <div class="campo" id="${numero}-pp-2"></div>
+            <input class="campo" type="text"  maxlength="1" id="${numero}-psp-0" name="profundidad_palatina-${numero}">
+            <input class="campo" type="text"  maxlength="1" id="${numero}-psp-1" name="profundidad_palatina-${numero}">
+            <input class="campo" type="text"  maxlength="1" id="${numero}-psp-2" name="profundidad_palatina-${numero}">
         </div>
 
         <div class="fila triple">
-            <div class="campo" id="${numero}-mgp-0"></div>
-            <div class="campo" id="${numero}-mgp-1"></div>
-            <div class="campo" id="${numero}-mgp-2"></div>
+            <input class="campo" type="text"  maxlength="1" id="${numero}-mgp-0" name="margen_gingival-${numero}">
+            <input class="campo" type="text"  maxlength="1" id="${numero}-mgp-1" name="margen_gingival-${numero}">
+            <input class="campo" type="text"  maxlength="1" id="${numero}-mgp-2" name="margen_gingival-${numero}">
         </div>
     
         <div class="valores-placa">
@@ -110,7 +114,7 @@ function crearDienteHTML(numero) {
         </div>
 
         <div class="fila">
-            <div class="campo unico" id="${numero}-furca_p"></div>
+            <input class="campo unico" type="text" maxlength="1" id="${numero}-furca_p" name="furca-${numero}">
         </div>
 
     </div>`;

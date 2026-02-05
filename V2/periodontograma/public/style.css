@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-    max-width: 1400px;
+    max-width: 1300px;
     margin: auto;
     background: white;
     border-radius: 10px;
@@ -23,7 +23,7 @@ body {
 .header {
     background: linear-gradient(135deg, #667eea 0%, #082ad7 100%);
     color: white;
-    padding: 15px;
+    padding: 10px;
     text-align: center;
 }
 
@@ -118,7 +118,7 @@ body {
 }
 
 .campo {
-    width: 18px;
+    width: 20.5px;
     height: 18px;
     border: 1px solid #999;
     border-radius: 3px;
@@ -140,10 +140,10 @@ body {
 .campo.warning { background: #FF9800; }
 .campo.danger  { background: #f44336; }
 
-input.center-text {
+input {
             text-align: center;   /* Centers the text horizontally */
-            padding: 8px;
-            font-size: 12px;
+            padding: 6px;
+            font-size: 10px;
             width: 200px;
         }
 
