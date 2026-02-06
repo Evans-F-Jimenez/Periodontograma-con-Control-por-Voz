@@ -87,10 +87,25 @@ body {
 
 .diente.ausente .diente-box {
   visibility: visible;    /* se mantiene */
+  opacity: 0.5;
 }
 
-.diente.ausente {
-  opacity: 0.45;
+.diente-box {
+  position: relative;
+}
+
+.diente.ausente .diente-box::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -10%;
+  width: 120%;
+  height: 3px;
+  background: #333;
+  transform: rotate(-30deg);
+  transform-origin: center;
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 /* .diente.ausente {
