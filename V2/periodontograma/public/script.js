@@ -147,8 +147,8 @@ function setInputValue(id, valor) {
   el.value = valor;
   el.classList.add("filled");
 
-  if (Number(valor) >= 6) el.classList.add("danger");
-  else if (Number(valor) >= 4) el.classList.add("warning");
+//  if (Number(valor) >= 6) el.classList.add("danger");
+ // else if (Number(valor) >= 4) el.classList.add("warning");
 }
 
 function marcarImplante(num) {
@@ -263,7 +263,7 @@ function cargarPeriodontogramaDesdeObjeto(data) {
 
     d.vestibular?.placa?.forEach((v, i) => {
       marcarPlaca(num, "vestibular", i, v);
-      console.log("SANGRADO:", num, d.vestibular?.sangrado);
+      // console.log("SANGRADO:", num, d.vestibular?.sangrado);
     });
 
     d.palatino?.placa?.forEach((v, i) => {
@@ -282,12 +282,16 @@ function cargarPeriodontogramaDesdeObjeto(data) {
       if (v !== 0) setInputValue(`${num}-mgv-${i}`, v);
     });
 
+    d.palatino?.margenGingival?.forEach((v, i) => {
+      if (v !== 0) setInputValue(`${num}-mgp-${i}`, v);
+    });
+
     d.palatino?.profundidadSondaje?.forEach((v, i) => {
       if (v > 0) setInputValue(`${num}-psp-${i}`, v);
     });
 
-    d.palatino?.margenGingival?.forEach((v, i) => {
-      if (v !== 0) setInputValue(`${num}-mgp-${i}`, v);
+    d.vestibular?.profundidadSondaje?.forEach((v, i) => {
+      if (v > 0) setInputValue(`${num}-psv-${i}`, v);
     });
   });
 }
