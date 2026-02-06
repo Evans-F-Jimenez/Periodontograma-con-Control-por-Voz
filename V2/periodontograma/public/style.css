@@ -104,6 +104,23 @@ body {
     height: 25px;
 }
 
+.valor.placa-activa {
+  background-color: #007bff;
+  width: 20px;
+  height: 20px;
+  border-radius: 10%;
+  opacity: 90%;
+}
+
+.valor.sangrado-activa {
+  background-color: #f44336;
+  width: 20px;
+  height: 20px;
+  border-radius: 10%;
+  opacity: 90%;
+}
+
+
 .valor {
     width: 20px;
     height: 20px;
@@ -113,12 +130,14 @@ body {
     align-items: center;
     justify-content: center;
     background: #eee;
-    border-radius: 3px;
 }
 
 .valor.filled { background: #4CAF50; color: white; }
-.valor.warning { background: #FF9800; }
-.valor.danger  { background: #f44336; }
+.placa-activa {
+  background-color: rgb(97, 123, 255);
+  opacity: 100%;
+  border-radius: 10%;
+}
 
 .diente-box {
     border: 1px solid #333;

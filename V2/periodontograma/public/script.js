@@ -41,16 +41,16 @@ function crearDienteHTML(numero) {
 
         <!-- SANGRADO -->
         <div class="valores-sangrado">
-            <div class="valor" id="${numero}-v-0"></div>
-            <div class="valor" id="${numero}-v-1"></div>
-            <div class="valor" id="${numero}-v-2"></div>
+            <div class="valor" id="${numero}-sv-0"></div>
+            <div class="valor" id="${numero}-sv-1"></div>
+            <div class="valor" id="${numero}-sv-2"></div>
         </div>
 
         <!-- PLACA -->
         <div class="valores-placa">
-            <div class="valor" id="${numero}-p-0"></div>
-            <div class="valor" id="${numero}-p-1"></div>
-            <div class="valor" id="${numero}-p-2"></div>
+            <div class="valor" id="${numero}-pv-0"></div>
+            <div class="valor" id="${numero}-pv-1"></div>
+            <div class="valor" id="${numero}-pv-2"></div>
         </div>
         
         <!-- ANCHURA DE ENCIA -->
@@ -184,6 +184,29 @@ function marcarAusente(num) {
   diente.classList.add("ausente");
 }
 
+function marcarPlaca(num, cara, index, valor) {
+  if (!valor) return;
+
+  const pref = cara === "vestibular" ? "pv" : "pp";
+  const el = document.getElementById(`${num}-${pref}-${index}`);
+
+  if (!el) return;
+
+  el.classList.add("placa-activa");
+}
+
+function marcarSangrado(num, cara, index, valor) {
+  if (!valor) return;
+
+  const pref = cara === "vestibular" ? "sv" : "sp";
+  const el = document.getElementById(`${num}-${pref}-${index}`);
+  // console.log("Intentando marcar:", `${num}-${pref}-${index}`);
+  // console.log(document.getElementById(`${num}-${pref}-${index}`));
+  if (!el) return;
+
+  el.classList.add("sangrado-activa");
+}
+
 async function refrescarPeriodontograma() {
   try {
     const res = await fetch(
@@ -230,11 +253,30 @@ function cargarPeriodontogramaDesdeObjeto(data) {
       setInputValue(`${num}-anchura_encia`, d.anchuraEncia);
     }
 
-    d.vestibular?.profundidadSondaje?.forEach((v, i) => {
-      if (v > 0) setInputValue(`${num}-psv-${i}`, v);
+    if (d.vestibular.furca > 0) {
+      setInputValue(`${num}-furca_v`, d.vestibular.furca);
+    }
+
+    if (d.palatino.furca > 0) {
+      setInputValue(`${num}-furca_p`, d.palatino.furca);
+    }
+
+    d.vestibular?.placa?.forEach((v, i) => {
+      marcarPlaca(num, "vestibular", i, v);
+      console.log("SANGRADO:", num, d.vestibular?.sangrado);
     });
 
-    
+    d.palatino?.placa?.forEach((v, i) => {
+      marcarPlaca(num, "palatino", i, v);
+    });
+
+    d.vestibular?.sangrado?.forEach((v, i) => {
+      marcarSangrado(num, "vestibular", i, v);
+    });
+
+    d.palatino?.sangrado?.forEach((v, i) => {
+      marcarSangrado(num, "palatino", i, v);
+    });
 
     d.vestibular?.margenGingival?.forEach((v, i) => {
       if (v !== 0) setInputValue(`${num}-mgv-${i}`, v);
@@ -259,6 +301,11 @@ function limpiarPeriodontograma() {
   document.querySelectorAll(".diente-box").forEach((box) => {
     box.classList.remove("implante");
   });
+
+  document.querySelectorAll(".valor").forEach(v => {
+  v.classList.remove("placa-activa");
+  v.classList.remove("sangrado-activa");
+});
 
   document.querySelectorAll(".extra-info").forEach((i) => (i.textContent = ""));
 
