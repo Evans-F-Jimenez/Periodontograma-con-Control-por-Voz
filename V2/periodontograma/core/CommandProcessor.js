@@ -117,8 +117,8 @@ class CommandProcessor {
         }
 
         // ---------- ANCHURA DE ENCÍA ----------
-        if ((texto.includes("encía") || texto.includes("encia")) && cara && numeros.length > 0) {
-            return this.perio.registrarAnchuraEncia(numDiente, cara, numeros[0]);
+        if ((texto.includes("encía") || texto.includes("encia")) && numeros.length > 0) {
+            return this.perio.registrarAnchuraEncia(numDiente, numeros[0]);
         }
 
         return false;

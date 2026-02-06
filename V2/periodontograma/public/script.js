@@ -1,5 +1,5 @@
 let ultimoSnapshot = null;
-let periodontogramaId = "2026-02-05";
+let periodontogramaId = "2026-02-06";
 
 const dientes = {};
 
@@ -177,9 +177,7 @@ function ocultarFilasDiente(num) {
 }
 
 function marcarAusente(num) {
-  const diente = document
-    .getElementById(`box-${num}`)
-    ?.closest(".diente");
+  const diente = document.getElementById(`box-${num}`)?.closest(".diente");
 
   if (!diente) return;
 
@@ -190,7 +188,7 @@ async function refrescarPeriodontograma() {
   try {
     const res = await fetch(
       `Data/periodontograma_${periodontogramaId}.json?ts=${Date.now()}`,
-      { cache: "no-store" }
+      { cache: "no-store" },
     );
     const data = await res.json();
 
@@ -203,25 +201,22 @@ async function refrescarPeriodontograma() {
       limpiarPeriodontograma();
       cargarPeriodontogramaDesdeObjeto(data);
     }
-
   } catch (err) {
     console.error("Error al refrescar periodontograma", err);
   }
 }
 
-
 function cargarPeriodontogramaDesdeObjeto(data) {
   Object.entries(data).forEach(([num, d]) => {
-
     // if (d.ausente) {
     //   ocultarFilasDiente(num);
     //   return;
     // }
 
     if (d.ausente) {
-  marcarAusente(num);
-  return;
-}
+      marcarAusente(num);
+      return;
+    }
 
     if (d.implante) {
       marcarImplante(num);
@@ -231,9 +226,15 @@ function cargarPeriodontogramaDesdeObjeto(data) {
       setInputValue(`${num}-movilidad`, d.movilidad);
     }
 
+    if (d.anchuraEncia > 0) {
+      setInputValue(`${num}-anchura_encia`, d.anchuraEncia);
+    }
+
     d.vestibular?.profundidadSondaje?.forEach((v, i) => {
       if (v > 0) setInputValue(`${num}-psv-${i}`, v);
     });
+
+    
 
     d.vestibular?.margenGingival?.forEach((v, i) => {
       if (v !== 0) setInputValue(`${num}-mgv-${i}`, v);
@@ -250,23 +251,22 @@ function cargarPeriodontogramaDesdeObjeto(data) {
 }
 
 function limpiarPeriodontograma() {
-  document.querySelectorAll("input.campo, input.campo.unico").forEach(i => {
+  document.querySelectorAll("input.campo, input.campo.unico").forEach((i) => {
     i.value = "";
     i.classList.remove("filled", "danger", "warning");
   });
 
-  document.querySelectorAll(".diente-box").forEach(box => {
+  document.querySelectorAll(".diente-box").forEach((box) => {
     box.classList.remove("implante");
   });
 
-  document.querySelectorAll(".extra-info").forEach(i => i.textContent = "");
+  document.querySelectorAll(".extra-info").forEach((i) => (i.textContent = ""));
 
-  document.querySelectorAll(".diente").forEach(d => {
+  document.querySelectorAll(".diente").forEach((d) => {
     d.classList.remove("ausente");
-    [...d.children].forEach(c => c.style.display = "");
+    [...d.children].forEach((c) => (c.style.display = ""));
   });
 }
-
 
 window.onload = () => {
   inicializarDientes();

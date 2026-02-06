@@ -21,22 +21,21 @@ class Periodontograma {
             ausente: false,
             implante: false,
             movilidad: 0,
+            anchuraEncia: 0,
             vestibular: {
                 furca: 0,
                 sangrado: [false, false, false],
                 placa: [false, false, false],
                 margenGingival: [0,0,0],
-                profundidadSondaje: [0,0,0],
-                anchuraEncia: 0
+                profundidadSondaje: [0,0,0]
             },
             palatino: {
                 furca: 0,
                 sangrado: [false, false, false],
                 placa: [false, false, false],
                 margenGingival: [0,0,0],
-                profundidadSondaje: [0,0,0],
-                anchuraEncia: 0
-            }
+                profundidadSondaje: [0,0,0]
+                        }
         };
     }
 
@@ -127,10 +126,9 @@ class Periodontograma {
         return false;
     }
 
-    registrarAnchuraEncia(diente, cara, valor) {
+    registrarAnchuraEncia(diente, valor) {
         if (this.dientes[diente] && !this.dientes[diente].ausente && valor >=0) {
-            const caraReal = cara === "lingual" ? "palatino" : cara;
-            this.dientes[diente][caraReal].anchuraEncia = valor;
+            this.dientes[diente].anchuraEncia = valor;
             console.log(`✓ Diente ${diente}, anchura de encía: ${valor}mm`);
             return true;
         }
