@@ -307,12 +307,17 @@ function cargarPeriodontogramaDesdeObjeto(data) {
 function limpiarPeriodontograma() {
   document.querySelectorAll("input.campo, input.campo.unico").forEach((i) => {
     i.value = "";
-    i.classList.remove("filled", "danger", "warning");
+    i.classList.remove("filled");
   });
 
   document.querySelectorAll(".diente-box").forEach((box) => {
     box.classList.remove("implante");
   });
+
+  document.querySelectorAll(".diente-box").forEach(box => {
+  box.classList.remove("implante");
+});
+
 
   document.querySelectorAll(".valor").forEach(v => {
   v.classList.remove("placa-activa");
@@ -331,6 +336,14 @@ function inicializarEventosValores() {
   document.querySelectorAll(".valor").forEach(el => {
     el.addEventListener("click", () => {
       manejarClickValor(el);
+    });
+  });
+}
+
+function inicializarEventosDientes() {
+  document.querySelectorAll(".diente-box").forEach(box => {
+    box.addEventListener("click", () => {
+      manejarClickDiente(box);
     });
   });
 }
@@ -356,6 +369,48 @@ function manejarClickValor(el) {
   }
 }
 
+function manejarClickDiente(box) {
+  const num = box.id.replace("box-", "");
+  const diente = box.closest(".diente");
+  const info = document.getElementById(`info-${num}`);
+
+  const estadoActual = obtenerEstadoDiente(diente);
+
+  // limpiar todo
+  diente.classList.remove("ausente");
+  box.classList.remove("implante");
+  info.textContent = "";
+
+  let nuevoEstado;
+
+  if (estadoActual === "normal") {
+    nuevoEstado = "ausente";
+    diente.classList.add("ausente");
+  } 
+  else if (estadoActual === "ausente") {
+    nuevoEstado = "implante";
+    box.classList.add("implante");
+    info.textContent = "IMP";
+  } 
+  else {
+    nuevoEstado = "normal";
+  }
+
+  actualizarEstadoModelo(num, nuevoEstado);
+}
+
+
+
+function obtenerEstadoDiente(diente) {
+  const box = diente.querySelector(".diente-box");
+
+  if (diente.classList.contains("ausente")) return "ausente";
+  if (box.classList.contains("implante")) return "implante";
+  return "normal";
+}
+
+
+
 function actualizarModelo(num, cara, propiedad, index, valor) {
   if (!dientes[num][cara][propiedad]) {
     dientes[num][cara][propiedad] = [false, false, false];
@@ -366,6 +421,12 @@ function actualizarModelo(num, cara, propiedad, index, valor) {
   console.log("Modelo actualizado:", dientes[num]);
 }
 
+function actualizarEstadoModelo(num, estado) {
+  dientes[num].ausente = estado === "ausente";
+  dientes[num].implante = estado === "implante";
+
+  console.log("Estado actualizado:", num, estado);
+}
 
 
 window.onload = () => {
@@ -380,6 +441,7 @@ window.onload = () => {
   renderizar(infDer, "arcada-inferior-derecha", true);
 
   inicializarEventosValores();
+  inicializarEventosDientes();
 
   refrescarPeriodontograma();
 
