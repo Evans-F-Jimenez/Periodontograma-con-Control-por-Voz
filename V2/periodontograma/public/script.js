@@ -327,6 +327,47 @@ function limpiarPeriodontograma() {
   });
 }
 
+function inicializarEventosValores() {
+  document.querySelectorAll(".valor").forEach(el => {
+    el.addEventListener("click", () => {
+      manejarClickValor(el);
+    });
+  });
+}
+
+function manejarClickValor(el) {
+  const id = el.id; 
+  // Ejemplo: "18-pv-0" o "18-sp-1"
+
+  const [num, tipo, index] = id.split("-");
+  const cara = tipo.includes("v") ? "vestibular" : "palatino";
+
+  const esPlaca = tipo.startsWith("pv") || tipo.startsWith("pp");
+  const esSangrado = tipo.startsWith("sv") || tipo.startsWith("sp");
+
+  if (esPlaca) {
+    el.classList.toggle("placa-activa");
+    actualizarModelo(num, cara, "placa", index, el.classList.contains("placa-activa"));
+  }
+
+  if (esSangrado) {
+    el.classList.toggle("sangrado-activa");
+    actualizarModelo(num, cara, "sangrado", index, el.classList.contains("sangrado-activa"));
+  }
+}
+
+function actualizarModelo(num, cara, propiedad, index, valor) {
+  if (!dientes[num][cara][propiedad]) {
+    dientes[num][cara][propiedad] = [false, false, false];
+  }
+
+  dientes[num][cara][propiedad][index] = valor;
+
+  console.log("Modelo actualizado:", dientes[num]);
+}
+
+
+
 window.onload = () => {
   inicializarDientes();
 
@@ -337,6 +378,8 @@ window.onload = () => {
   // Arcada inferior invertida
   renderizar(infIzq, "arcada-inferior-izquierda", true);
   renderizar(infDer, "arcada-inferior-derecha", true);
+
+  inicializarEventosValores();
 
   refrescarPeriodontograma();
 
