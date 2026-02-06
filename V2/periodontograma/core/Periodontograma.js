@@ -27,15 +27,17 @@ class Periodontograma {
                 sangrado: [false, false, false],
                 placa: [false, false, false],
                 margenGingival: [0,0,0],
-                profundidadSondaje: [0,0,0]
+                profundidadSondaje: [0,0,0],
+                NIC: [0,0,0]
             },
             palatino: {
                 furca: 0,
                 sangrado: [false, false, false],
                 placa: [false, false, false],
                 margenGingival: [0,0,0],
-                profundidadSondaje: [0,0,0]
-                        }
+                profundidadSondaje: [0,0,0],
+                NIC: [0,0,0]
+                    }
         };
     }
 
@@ -120,6 +122,18 @@ class Periodontograma {
             if (posicion >=0 && posicion < 3) {
                 this.dientes[diente][caraReal].margenGingival[posicion] = valor;
                 console.log(`✓ Diente ${diente}, ${cara}, posición ${posicion+1}: MG ${valor}mm`);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    registrarNIC(diente, cara, posicion, valor) {
+        if (this.dientes[diente] && ["vestibular","palatino","lingual"].includes(cara)) {
+            const caraReal = cara === "lingual" ? "palatino" : cara;
+            if (posicion >= 0 && posicion < 3) {
+                this.dientes[diente][caraReal].NIC[posicion] = valor;
+                console.log(`✓ Diente ${diente}, ${cara}, posición ${posicion+1}: ${valor}`);
                 return true;
             }
         }

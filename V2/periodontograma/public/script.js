@@ -278,6 +278,14 @@ function cargarPeriodontogramaDesdeObjeto(data) {
       marcarSangrado(num, "palatino", i, v);
     });
 
+    d.vestibular?.NIC?.forEach((v, i) => {
+      if (v !== 0) setInputValue(`${num}-NV-${i}`, v);
+    });
+
+    d.palatino?.NIC?.forEach((v, i) => {
+      if (v !== 0) setInputValue(`${num}-NP-${i}`, v);
+    });
+
     d.vestibular?.margenGingival?.forEach((v, i) => {
       if (v !== 0) setInputValue(`${num}-mgv-${i}`, v);
     });

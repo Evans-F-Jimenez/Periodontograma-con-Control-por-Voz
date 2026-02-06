@@ -116,6 +116,21 @@ class CommandProcessor {
             }
         }
 
+        // ---------- NIC ----------
+        if ((texto.includes("NIC") || texto.includes("Insercion clinica")) && cara) {
+            const numerosMG = numeros;
+            let pos = Object.keys(this.posiciones).find(p => texto.includes(p));
+            if (pos !== undefined && numerosMG.length > 0) {
+                return this.perio.registrarNIC(numDiente, cara, this.posiciones[pos], numerosMG[0]);
+            } else if (numerosMG.length >= 3) {
+                let success = true;
+                for (let i = 0; i < 3; i++) {
+                    if (!this.perio.registrarNIC(numDiente, cara, i, numerosMG[i])) success = false;
+                }
+                return success;
+            }
+        }
+
         // ---------- ANCHURA DE ENCÍA ----------
         if ((texto.includes("encía") || texto.includes("encia")) && numeros.length > 0) {
             return this.perio.registrarAnchuraEncia(numDiente, numeros[0]);
