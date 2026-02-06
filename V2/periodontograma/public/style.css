@@ -59,6 +59,7 @@ body {
 .diente {
     width: 70px;
     text-align: center;
+    border: 0.5px solid #33333322;
 }
 
 .diente-box.implante {
@@ -132,7 +133,7 @@ body {
     background: #eee;
 }
 
-.valor.filled { background: #4CAF50; color: white; }
+/* .valor.filled { background: #4caf4f20; color: white; } */
 .placa-activa {
   background-color: rgb(97, 123, 255);
   opacity: 100%;
@@ -181,12 +182,12 @@ body {
 }
 
 .campo.filled {
-    background: #4CAF50;
-    color: white;
+    background: white;
+    color: black;
 }
 
-.campo.warning { background: #FF9800; }
-.campo.danger  { background: #f44336; }
+/* .campo.warning { background: #FF9800; }
+.campo.danger  { background: #f44336; } */
 
 input {
             text-align: center;   /* Centers the text horizontally */
