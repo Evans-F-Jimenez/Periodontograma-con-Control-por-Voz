@@ -65,7 +65,7 @@ body {
 .diente-box.implante {
   border: 1px solid #333;
   background: #e3f2fd;
-  font-size: 6px;
+  font-size: 8px;
 }
 
 .diente-box.implante .numero-diente {
@@ -152,7 +152,7 @@ body {
 }
 
 .numero-diente { font-weight: bold; }
-.extra-info { font-size: 10px; color: #666; }
+.extra-info { font-size: 8px; color: #666; }
 
 .fila {
     border-top: 1px solid #333;
