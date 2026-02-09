@@ -124,7 +124,7 @@ body {
 }
 
 .titulo {
-  height: 23.9px; /* Ajusta exactamente al alto real de cada fila */
+  height: 23.9px; 
   display: flex;
   align-items: center;
 }
@@ -133,11 +133,6 @@ body {
   display: flex;
   flex-direction: column-reverse;
 }
-
-/* .diente.ausente {
-  text-decoration: line-through;
-} */
-
 
 .valores-sangrado,
 .valores-placa {
