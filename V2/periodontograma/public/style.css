@@ -98,7 +98,7 @@ body {
 .diente.ausente .diente-box::after {
   content: "";
   position: absolute;
-  top: 50%;
+  top: 47%;
   left: -10%;
   width: 120%;
   height: 3px;
