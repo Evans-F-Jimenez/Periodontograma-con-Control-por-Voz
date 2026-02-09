@@ -120,12 +120,12 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   margin-right: 10px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
 }
 
 .titulo {
-  height: 23.9px; 
+  height: 24px; 
   display: flex;
   align-items: center;
 }
