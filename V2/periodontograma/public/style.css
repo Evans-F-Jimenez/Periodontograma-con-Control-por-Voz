@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-    max-width: 1300px;
+    max-width: 1400px;
     margin: auto;
     background: white;
     border-radius: 10px;
@@ -107,6 +107,31 @@ body {
   transform-origin: center;
   pointer-events: none;
   opacity: 0.5;
+}
+
+.diente-wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.titulos-fila {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-right: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.titulo {
+  height: 23.9px; /* Ajusta exactamente al alto real de cada fila */
+  display: flex;
+  align-items: center;
+}
+
+.titulos-fila.invertido {
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 /* .diente.ausente {

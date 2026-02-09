@@ -21,8 +21,34 @@ function inicializarDientes() {
   });
 }
 
-function crearDienteHTML(numero) {
+function crearDienteHTML(numero, mostrarNombres = false) {
+
+  const esInferior = numero === 48;
+
   return `
+    <div class="diente-wrapper">
+    
+      ${mostrarNombres ? `
+        <div class="titulos-fila ${esInferior ? 'invertido' : ''}">
+          <div class="titulo">Movilidad</div>
+          <div class="titulo">Furca</div>
+          <div class="titulo">Sangrado</div>
+          <div class="titulo">Placa</div>
+          <div class="titulo">Anchura encía</div>
+          <div class="titulo">Margen gingival</div>
+          <div class="titulo">Prof. sondaje</div>
+          <div class="titulo">NIC</div>
+          <div class="titulo">Diente</div>
+          <div class="titulo">NIC</div>
+          <div class="titulo">Prof. sondaje</div>
+          <div class="titulo">Margen gingival</div>
+          <div class="titulo">Placa</div>
+          <div class="titulo">Sangrado</div>
+          <div class="titulo">Furca</div>
+        </div>
+      ` : ""}
+
+      
     <div class="diente">
 
        <!-- MOVILIDAD -->
@@ -120,7 +146,8 @@ function crearDienteHTML(numero) {
             <input class="campo unico" type="text" maxlength="1" id="${numero}-furca_p" name="furca-${numero}">
         </div>
 
-    </div>`;
+    </div>
+    </div>`
 }
 
 function renderizar(lista, contenedor) {
