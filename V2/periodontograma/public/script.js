@@ -13,9 +13,9 @@ const infDer = [31, 32, 33, 34, 35, 36, 37, 38];
 function inicializarDientes() {
   [...supIzq, ...supDer, ...infIzq, ...infDer].forEach((n) => {
     dientes[n] = {
-      movilidad: 0,
       ausente: false,
       implante: false,
+      movilidad: 0,
       anchuraEncia: 0,
       vestibular: {
         placa: [false, false, false],
