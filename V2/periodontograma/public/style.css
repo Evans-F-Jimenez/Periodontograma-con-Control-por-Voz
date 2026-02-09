@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: auto;
     background: white;
     border-radius: 10px;
@@ -43,7 +43,7 @@ body {
     font-weight: bold;
     margin-bottom: 15px;
     margin-top: 15px;
-    margin-left: 8%;
+    margin-right: 115px;
     font-size: 1.2em;
 }
 
@@ -267,4 +267,24 @@ input {
 #arcada-inferior-derecha .diente {
   display: flex;
   flex-direction: column-reverse; /* filas de abajo hacia arriba */
+}
+
+.arcada-wrapper {
+  position: relative;
+  display: flex;
+}
+
+
+.titulo-caras-arcada {
+  position: absolute;
+  right: 8%;   /* Ajusta según separación deseada */
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  font-weight: bold;
+  font-size: 13px;
+  color: #333;
 }
