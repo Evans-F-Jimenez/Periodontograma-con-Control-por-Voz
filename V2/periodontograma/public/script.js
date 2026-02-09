@@ -1,5 +1,6 @@
 let ultimoSnapshot = null;
 let periodontogramaId = "2026-02-06";
+let autoSaveTimeout = null;
 
 const dientes = {};
 
@@ -12,11 +13,26 @@ const infDer = [31, 32, 33, 34, 35, 36, 37, 38];
 function inicializarDientes() {
   [...supIzq, ...supDer, ...infIzq, ...infDer].forEach((n) => {
     dientes[n] = {
-      vestibular: [0, 0, 0],
-      palatino: [0, 0, 0],
       movilidad: 0,
       ausente: false,
       implante: false,
+      anchuraEncia: 0,
+      vestibular: {
+        placa: [false, false, false],
+        sangrado: [false, false, false],
+        margenGingival: [0, 0, 0],
+        profundidadSondaje: [0, 0, 0],
+        NIC: [0, 0, 0],
+        furca: 0
+      },
+      palatino: {
+        placa: [false, false, false],
+        sangrado: [false, false, false],
+        margenGingival: [0, 0, 0],
+        profundidadSondaje: [0, 0, 0],
+        NIC: [0, 0, 0],
+        furca: 0
+      }
     };
   });
 }
@@ -445,14 +461,43 @@ function actualizarModelo(num, cara, propiedad, index, valor) {
 
   dientes[num][cara][propiedad][index] = valor;
 
-  console.log("Modelo actualizado:", dientes[num]);
+  autoGuardar();
 }
 
 function actualizarEstadoModelo(num, estado) {
   dientes[num].ausente = estado === "ausente";
   dientes[num].implante = estado === "implante";
 
-  console.log("Estado actualizado:", num, estado);
+  autoGuardar();
+}
+
+
+async function guardarPeriodontograma() {
+  try {
+    const res = await fetch(
+      `/api/periodontograma/${periodontogramaId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dientes),
+      }
+    );
+
+    const result = await res.json();
+    console.log("Guardado:", result);
+  } catch (err) {
+    console.error("Error guardando:", err);
+  }
+}
+
+function autoGuardar() {
+  clearTimeout(autoSaveTimeout);
+
+  autoSaveTimeout = setTimeout(() => {
+    guardarPeriodontograma();
+  }, 800); // guarda 800ms después del último cambio
 }
 
 
@@ -471,6 +516,118 @@ window.onload = () => {
   inicializarEventosDientes();
 
   refrescarPeriodontograma();
+
+  document.addEventListener("input", (e) => {
+  const id = e.target.id;
+  if (!id) return;
+
+  const partes = id.split("-");
+  const num = partes[0];
+
+  if (!dientes[num]) return;
+
+  const valor = Number(e.target.value) || 0;
+
+  // =========================
+  // MOVILIDAD
+  // =========================
+  if (id.includes("movilidad")) {
+    dientes[num].movilidad = valor;
+  }
+
+  // =========================
+  // ANCHURA ENCÍA
+  // =========================
+  if (id.includes("anchura_encia")) {
+    dientes[num].anchuraEncia = valor;
+  }
+
+  // =========================
+  // FURCA VESTIBULAR
+  // =========================
+  if (id.includes("furca_v")) {
+    if (!dientes[num].vestibular) dientes[num].vestibular = {};
+    dientes[num].vestibular.furca = valor;
+  }
+
+  // =========================
+  // FURCA PALATINO
+  // =========================
+  if (id.includes("furca_p")) {
+    if (!dientes[num].palatino) dientes[num].palatino = {};
+    dientes[num].palatino.furca = valor;
+  }
+
+  // =========================
+  // MARGEN GINGIVAL VESTIBULAR (mgv)
+  // =========================
+  if (id.includes("mgv")) {
+    const index = Number(partes[2]);
+    if (!dientes[num].vestibular.margenGingival)
+      dientes[num].vestibular.margenGingival = [0, 0, 0];
+
+    dientes[num].vestibular.margenGingival[index] = valor;
+  }
+
+  // =========================
+  // MARGEN GINGIVAL PALATINO (mgp)
+  // =========================
+  if (id.includes("mgp")) {
+    const index = Number(partes[2]);
+    if (!dientes[num].palatino.margenGingival)
+      dientes[num].palatino.margenGingival = [0, 0, 0];
+
+    dientes[num].palatino.margenGingival[index] = valor;
+  }
+
+  // =========================
+  // PROFUNDIDAD VESTIBULAR (psv)
+  // =========================
+  if (id.includes("psv")) {
+    const index = Number(partes[2]);
+    if (!dientes[num].vestibular.profundidadSondaje)
+      dientes[num].vestibular.profundidadSondaje = [0, 0, 0];
+
+    dientes[num].vestibular.profundidadSondaje[index] = valor;
+  }
+
+  // =========================
+  // PROFUNDIDAD PALATINO (psp)
+  // =========================
+  if (id.includes("psp")) {
+    const index = Number(partes[2]);
+    if (!dientes[num].palatino.profundidadSondaje)
+      dientes[num].palatino.profundidadSondaje = [0, 0, 0];
+
+    dientes[num].palatino.profundidadSondaje[index] = valor;
+  }
+
+  // =========================
+  // NIC VESTIBULAR (NV)
+  // =========================
+  if (id.includes("NV")) {
+    const index = Number(partes[2]);
+    if (!dientes[num].vestibular.NIC)
+      dientes[num].vestibular.NIC = [0, 0, 0];
+
+    dientes[num].vestibular.NIC[index] = valor;
+  }
+
+  // =========================
+  // NIC PALATINO (NP)
+  // =========================
+  if (id.includes("NP")) {
+    const index = Number(partes[2]);
+    if (!dientes[num].palatino.NIC)
+      dientes[num].palatino.NIC = [0, 0, 0];
+
+    dientes[num].palatino.NIC[index] = valor;
+  }
+
+  autoGuardar();
+});
+
+
 
   // 🔄 refresco cada 2 segundos (ajustable)
   // setInterval(refrescarPeriodontograma, 2000);
