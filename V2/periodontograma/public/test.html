@@ -41,6 +41,7 @@
     <div id="log"></div>
 
     <script>
+      let periodontogramaId = "2026-02-10";
       const log = document.getElementById("log");
       const comandoInput = document.getElementById("comando");
 
@@ -54,7 +55,7 @@
       async function enviarComando(texto) {
         addLog("➡️ Enviando: " + texto);
         try {
-          const res = await fetch("/api/comando", {
+          const res = await fetch(`/api/comando/${periodontogramaId}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ texto }),

@@ -248,6 +248,30 @@ input {
   display: flex;
 }
 
+.button-container {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  margin-right: 120px;
+  padding: 4px 8px;
+  font-size: 14px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #667eea 0%, #082ad7 100%);
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+}
+
+.barra-superior{
+  display: flex;
+  justify-content: space-between;
+}
+
+.barra-inferior{
+  display: flex;
+  justify-content: space-between;
+}
+
 
 .titulo-caras-arcada {
   position: absolute;
