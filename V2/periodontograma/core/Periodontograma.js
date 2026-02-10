@@ -1,9 +1,27 @@
 const fs = require("fs");
 const path = require("path");
+let id_perio = "2026-02-10";
 
 class Periodontograma {
-    constructor() {
+    
+    constructor(id = id_perio) {
+
+        if (!id) {
+            throw new Error("Se requiere un ID para el periodontograma");
+        }
+
+        this.id = id;
+
+        this.filePath = path.join(
+            __dirname,
+            "..",
+            "public",
+            "Data",
+            `periodontograma_${this.id}.json`
+        );
+
         this.dientes = {};
+
         const todos = [
             18,17,16,15,14,13,12,11,
             21,22,23,24,25,26,27,28,
@@ -11,10 +29,46 @@ class Periodontograma {
             41,42,43,44,45,46,47,48
         ];
 
-        todos.forEach(n => {
-            this.dientes[n] = this._crearDiente();
-        });
+        // Si ya existe archivo → cargar
+        if (fs.existsSync(this.filePath)) {
+
+            const contenido = fs.readFileSync(this.filePath, "utf8");
+            this.dientes = JSON.parse(contenido);
+            console.log("✔ Periodontograma cargado desde archivo");
+
+        } else {
+
+            // Crear estructura nueva
+            todos.forEach(n => {
+                this.dientes[n] = this._crearDiente();
+            });
+
+            // Crear carpeta si no existe
+            const dir = path.dirname(this.filePath);
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir, { recursive: true });
+            }
+
+            this.guardarJSON();
+            console.log("✔ Nuevo periodontograma creado");
+        }
     }
+
+    // ===============================
+    // AUTOGUARDADO
+    // ===============================
+
+    guardarJSON() {
+        fs.writeFileSync(
+            this.filePath,
+            JSON.stringify(this.dientes, null, 2)
+        );
+        console.log("✔ Autoguardado backend");
+    }
+
+    // ===============================
+    // ESTRUCTURA BASE
+    // ===============================
 
     _crearDiente() {
         return {
@@ -22,29 +76,29 @@ class Periodontograma {
             implante: false,
             movilidad: 0,
             anchuraEncia: 0,
-            vestibular: {
-                furca: 0,
-                sangrado: [false, false, false],
-                placa: [false, false, false],
-                margenGingival: [0,0,0],
-                profundidadSondaje: [0,0,0],
-                NIC: [0,0,0]
-            },
-            palatino: {
-                furca: 0,
-                sangrado: [false, false, false],
-                placa: [false, false, false],
-                margenGingival: [0,0,0],
-                profundidadSondaje: [0,0,0],
-                NIC: [0,0,0]
-                    }
+            vestibular: this._crearCara(),
+            palatino: this._crearCara()
         };
     }
+
+    _crearCara() {
+        return {
+            furca: 0,
+            sangrado: [false, false, false],
+            placa: [false, false, false],
+            margenGingival: [0, 0, 0],
+            profundidadSondaje: [0, 0, 0],
+            NIC: [0, 0, 0]
+        };
+    }
+
+    // ===============================
+    // MÉTODOS CLÍNICOS
+    // ===============================
 
     marcarAusente(diente) {
         if (this.dientes[diente]) {
             this.dientes[diente].ausente = true;
-            console.log(`✓ Diente ${diente} marcado como ausente`);
             return true;
         }
         return false;
@@ -53,113 +107,133 @@ class Periodontograma {
     marcarImplante(diente) {
         if (this.dientes[diente]) {
             this.dientes[diente].implante = true;
-            console.log(`✓ Diente ${diente} marcado como implante`);
             return true;
         }
         return false;
     }
 
     registrarProfundidad(diente, cara, posicion, valor) {
-        if (this.dientes[diente] && ["vestibular","palatino","lingual"].includes(cara)) {
-            const caraReal = cara === "lingual" ? "palatino" : cara;
-            if (posicion >= 0 && posicion < 3) {
-                this.dientes[diente][caraReal].profundidadSondaje[posicion] = valor;
-                console.log(`✓ Diente ${diente}, ${cara}, posición ${posicion+1}: ${valor}mm`);
-                return true;
-            }
+        if (!this.dientes[diente]) return false;
+
+        const caraReal = cara === "lingual" ? "palatino" : cara;
+
+        if (posicion >= 0 && posicion < 3) {
+            this.dientes[diente][caraReal].profundidadSondaje[posicion] = valor;
+            return true;
         }
+
         return false;
     }
 
     registrarMovilidad(diente, grado) {
-        if (this.dientes[diente] && grado >=0 && grado <=3) {
+        if (this.dientes[diente] && grado >= 0 && grado <= 3) {
             this.dientes[diente].movilidad = grado;
-            console.log(`✓ Diente ${diente}, movilidad: grado ${grado}`);
             return true;
         }
         return false;
     }
 
     registrarFurca(diente, cara, grado) {
-        if (this.dientes[diente] && !this.dientes[diente].ausente) {
-            const caraReal = cara === "lingual" ? "palatino" : cara;
-            if (grado >=0 && grado <=3) {
-                this.dientes[diente][caraReal].furca = grado;
-                console.log(`✓ Diente ${diente}, furca: grado ${grado}`);
-                return true;
-            }
+        if (!this.dientes[diente] || this.dientes[diente].ausente) return false;
+
+        const caraReal = cara === "lingual" ? "palatino" : cara;
+
+        if (grado >= 0 && grado <= 3) {
+            this.dientes[diente][caraReal].furca = grado;
+            return true;
         }
+
         return false;
     }
 
     registrarSangrado(diente, cara, posicion) {
-        if (this.dientes[diente] && !this.dientes[diente].ausente) {
-            const caraReal = cara === "lingual" ? "palatino" : cara;
-            if (posicion >=0 && posicion < 3) {
-                this.dientes[diente][caraReal].sangrado[posicion] = true;
-                console.log(`✓ Diente ${diente}, ${cara}, posición ${posicion+1}: sangrado`);
-                return true;
-            }
+        if (!this.dientes[diente] || this.dientes[diente].ausente) return false;
+
+        const caraReal = cara === "lingual" ? "palatino" : cara;
+
+        if (posicion >= 0 && posicion < 3) {
+            this.dientes[diente][caraReal].sangrado[posicion] = true;
+            return true;
         }
+
         return false;
     }
 
     registrarPlaca(diente, cara, posicion) {
-        if (this.dientes[diente] && !this.dientes[diente].ausente && !this.dientes[diente].implante) {
-            const caraReal = cara === "lingual" ? "palatino" : cara;
-            if (posicion >=0 && posicion < 3) {
-                this.dientes[diente][caraReal].placa[posicion] = true;
-                console.log(`✓ Diente ${diente}, ${cara}, posición ${posicion+1}: placa`);
-                return true;
-            }
+        if (
+            !this.dientes[diente] ||
+            this.dientes[diente].ausente ||
+            this.dientes[diente].implante
+        ) return false;
+
+        const caraReal = cara === "lingual" ? "palatino" : cara;
+
+        if (posicion >= 0 && posicion < 3) {
+            this.dientes[diente][caraReal].placa[posicion] = true;
+            return true;
         }
+
         return false;
     }
 
     registrarMargenGingival(diente, cara, posicion, valor) {
-        if (this.dientes[diente] && !this.dientes[diente].ausente) {
-            const caraReal = cara === "lingual" ? "palatino" : cara;
-            if (posicion >=0 && posicion < 3) {
-                this.dientes[diente][caraReal].margenGingival[posicion] = valor;
-                console.log(`✓ Diente ${diente}, ${cara}, posición ${posicion+1}: MG ${valor}mm`);
-                return true;
-            }
+        if (!this.dientes[diente] || this.dientes[diente].ausente) return false;
+
+        const caraReal = cara === "lingual" ? "palatino" : cara;
+
+        if (posicion >= 0 && posicion < 3) {
+            this.dientes[diente][caraReal].margenGingival[posicion] = valor;
+            return true;
         }
+
         return false;
     }
 
     registrarNIC(diente, cara, posicion, valor) {
-        if (this.dientes[diente] && ["vestibular","palatino","lingual"].includes(cara)) {
-            const caraReal = cara === "lingual" ? "palatino" : cara;
-            if (posicion >= 0 && posicion < 3) {
-                this.dientes[diente][caraReal].NIC[posicion] = valor;
-                console.log(`✓ Diente ${diente}, ${cara}, posición ${posicion+1}: ${valor}`);
-                return true;
-            }
+        if (!this.dientes[diente]) return false;
+
+        const caraReal = cara === "lingual" ? "palatino" : cara;
+
+        if (posicion >= 0 && posicion < 3) {
+            this.dientes[diente][caraReal].NIC[posicion] = valor;
+            return true;
         }
+
         return false;
     }
 
     registrarAnchuraEncia(diente, valor) {
-        if (this.dientes[diente] && !this.dientes[diente].ausente && valor >=0) {
+        if (
+            this.dientes[diente] &&
+            !this.dientes[diente].ausente &&
+            valor >= 0
+        ) {
             this.dientes[diente].anchuraEncia = valor;
-            console.log(`✓ Diente ${diente}, anchura de encía: ${valor}mm`);
             return true;
         }
         return false;
     }
 
-    exportarJSON() {
-        const dir = path.join(__dirname, "..", "public", "Data");
-        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    // ===============================
+    // EXPORTACIÓN MANUAL
+    // ===============================
 
-        const fecha = new Date().toISOString().slice(0,10);
-        const file = `periodontograma_${fecha}.json`;
+    exportarJSON() {
+
+        const dir = path.join(__dirname, "..", "public", "Data");
+
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+
+        const fecha = new Date().toISOString().slice(0, 10);
+        const file = `periodontograma_${this.id}.json`;
+
         fs.writeFileSync(
             path.join(dir, file),
             JSON.stringify(this.dientes, null, 2)
         );
-        console.log(`✓ Periodontograma exportado a ${file}`);
+
         return file;
     }
 }

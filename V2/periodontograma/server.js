@@ -14,7 +14,10 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // ================= CORE =================
 const perio = new Periodontograma();
+// const perio = new Periodontograma('2026-02-10');
 const processor = new CommandProcessor(perio);
+const periodos = {}; // almacenamiento en memoria por ID
+
 
 // ================= API =================
 

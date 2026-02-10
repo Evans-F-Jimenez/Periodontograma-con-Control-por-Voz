@@ -1,5 +1,5 @@
 let ultimoSnapshot = null;
-let periodontogramaId = "2026-02-06";
+let periodontogramaId = "2026-02-10";
 let autoSaveTimeout = null;
 
 const dientes = {};
@@ -264,7 +264,7 @@ async function refrescarPeriodontograma() {
       console.log("🔄 Cambios detectados en JSON");
       ultimoSnapshot = snapshot;
 
-      limpiarPeriodontograma();
+      //limpiarPeriodontograma();
       cargarPeriodontogramaDesdeObjeto(data);
     }
   } catch (err) {
@@ -493,11 +493,27 @@ async function guardarPeriodontograma() {
 }
 
 function autoGuardar() {
-  clearTimeout(autoSaveTimeout);
+  console.log("🔥 autoGuardar llamado");
 
-  autoSaveTimeout = setTimeout(() => {
-    guardarPeriodontograma();
-  }, 800); // guarda 800ms después del último cambio
+  if (autoSaveTimeout) clearTimeout(autoSaveTimeout);
+
+  autoSaveTimeout = setTimeout(async () => {
+    console.log("📤 Enviando al backend...");
+
+    try {
+      const res = await fetch(`/api/periodontograma/${periodontogramaId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dientes),
+      });
+
+      const data = await res.json();
+      console.log("✔ Guardado:", data);
+      // cargarPeriodontogramaDesdeObjeto(data);
+    } catch (err) {
+      console.error("❌ Error:", err);
+    }
+  }, 800);
 }
 
 
@@ -509,8 +525,8 @@ window.onload = () => {
   renderizar(supDer, "arcada-superior-derecha");
 
   // Arcada inferior invertida
-  renderizar(infIzq, "arcada-inferior-izquierda", true);
-  renderizar(infDer, "arcada-inferior-derecha", true);
+  renderizar(infIzq, "arcada-inferior-izquierda");
+  renderizar(infDer, "arcada-inferior-derecha");
 
   inicializarEventosValores();
   inicializarEventosDientes();
