@@ -10,6 +10,9 @@ const supDer = [21, 22, 23, 24, 25, 26, 27, 28];
 const infIzq = [48, 47, 46, 45, 44, 43, 42, 41];
 const infDer = [31, 32, 33, 34, 35, 36, 37, 38];
 
+const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
 function inicializarDientes() {
   [...supIzq, ...supDer, ...infIzq, ...infDer].forEach((n) => {
     dientes[n] = {
@@ -391,6 +394,21 @@ function inicializarEventosDientes() {
   });
 }
 
+async function enviarComando(texto) {
+        console.log("➡️ Enviando: " + texto);
+        try {
+          const res = await fetch(`/api/comando/${periodontogramaId}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ texto }),
+          });
+          const data = await res.json();
+          console.log("✅ Respuesta: " + JSON.stringify(data));
+        } catch (e) {
+          console.log("❌ Error: " + e.message);
+        }
+      }
+
 function manejarClickValor(el) {
   const id = el.id; 
   // Ejemplo: "18-pv-0" o "18-sp-1"
@@ -560,6 +578,31 @@ window.onload =  async() => {
 
   await cargarDesdeBackend();
   //refrescarPeriodontograma();
+
+   if (SpeechRecognition) {
+         const recognition = new SpeechRecognition();
+         recognition.lang = "es-ES";
+         recognition.interimResults = false;
+
+         document.getElementById("voz").addEventListener("click", () => {
+           console.log("🎙️ Escuchando...");
+           recognition.start();
+         });
+
+         recognition.addEventListener("result", (e) => {
+           const texto = e.results[0][0].transcript;
+           console.log("🎤 Reconocido: " + texto);
+           enviarComando(texto);
+         });
+       recognition.addEventListener("error", (e) => {
+         console.log("⚠️ Error en reconocimiento: " + e.error);
+       });
+         recognition.addEventListener("end", () => {
+           console.log("ℹ️ Reconocimiento finalizado. Puedes hablar de nuevo.");
+         });
+       } else {
+         console.log("⚠️ Tu navegador no soporta SpeechRecognition");
+       }
 
   document.addEventListener("input", (e) => {
   const id = e.target.id;
