@@ -119,15 +119,16 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-right: 10px;
+  margin-right: 20px;
   font-size: 13px;
   font-weight: bold;
 }
 
 .titulo {
-  height: 24px; 
-  display: flex;
+  height: 24px;
+  /* display: flex; */
   align-items: center;
+  white-space: nowrap;
 }
 
 .titulos-fila.invertido {
@@ -251,7 +252,7 @@ input {
 .button-container {
   margin-top: 8px;
   margin-bottom: 4px;
-  margin-right: 120px;
+  margin-right: 20px;
   padding: 4px 8px;
   font-size: 14px;
   cursor: pointer;
