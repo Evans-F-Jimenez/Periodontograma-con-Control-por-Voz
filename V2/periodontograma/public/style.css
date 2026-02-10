@@ -13,9 +13,9 @@ body {
 
 .container {
     max-width: 1600px;
-    margin: auto;
+    margin: 10;
     background: white;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     overflow: hidden;
 }
@@ -25,6 +25,7 @@ body {
     color: white;
     padding: 10px;
     text-align: center;
+    white-space: nowrap;
 }
 
 .main-content {
@@ -45,6 +46,7 @@ body {
     margin-top: 15px;
     margin-right: 115px;
     font-size: 1.2em;
+    white-space: nowrap;
 }
 
 .cuadrantes {
@@ -131,7 +133,29 @@ body {
   white-space: nowrap;
 }
 
+.titulos-segmento {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+  opacity: 60%;
+}
+
+.segmento {
+  height: 24px;
+  /* display: flex; */
+  align-items: center;
+  white-space: nowrap;
+}
+
 .titulos-fila.invertido {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.titulos-segmento.invertido {
   display: flex;
   flex-direction: column-reverse;
 }
@@ -252,20 +276,22 @@ input {
 .button-container {
   margin-top: 8px;
   margin-bottom: 4px;
-  margin-right: 20px;
+  margin-left: 1105px;
   padding: 4px 8px;
   font-size: 14px;
   cursor: pointer;
   background: linear-gradient(135deg, #667eea 0%, #082ad7 100%);
   color: white;
   font-weight: bold;
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
+  white-space: nowrap;
 }
 
 .barra-superior{
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  margin-bottom: 4px;
 }
 
 .barra-inferior{

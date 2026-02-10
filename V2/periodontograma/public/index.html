@@ -1,61 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Periodontograma</title>
-<link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Periodontograma</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
 
-<body>
-
-<div class="container">
-    <div class="header">
+  <body>
+    <div class="container">
+      <div class="header">
         <h1>🦷 Periodontograma</h1>
-    </div>
+      </div>
 
-    <div class="main-content">
-
+      <div class="main-content">
         <!-- ARCADA SUPERIOR -->
         <div class="arcada">
-            <div class="barra-superior">
-                <div class="arcada-title">ARCADA SUPERIOR</div>
-                <button id="voz" class="button-container">🎤 Hablar</button>
+          <div class="barra-superior">
+            <div class="arcada-title">ARCADA SUPERIOR</div>
+            <button id="voz" class="button-container">🎤 Hablar</button>
+          </div>
+          <div class="arcada-wrapper">
+            <div class="cuadrantes">
+              <div
+                class="dientes-container"
+                id="arcada-superior-izquierda"
+              ></div>
+              <div class="dientes-container" id="arcada-superior-derecha"></div>
             </div>
-            <div class="arcada-wrapper">
-                <div class="cuadrantes">
-                    <div class="dientes-container" id="arcada-superior-izquierda"></div>
-                    <div class="dientes-container" id="arcada-superior-derecha"></div>
-                </div>
-                <div class="titulo-caras-arcada">
-                    <div>Vestibular</div>
-                    <div>Palatino</div>
-                </div>
-            </div>
+          </div>
         </div>
 
         <!-- ARCADA INFERIOR -->
         <div class="arcada">
-            <div class="arcada-wrapper">
-                <div class="titulo-caras-arcada">
-                    <div>Lingual</div>
-                    <div>Vestibular</div>
-                </div>
+          <div class="arcada-wrapper">
             <div class="cuadrantes">
-                <div class="dientes-container" id="arcada-inferior-izquierda"></div>
-                <div class="dientes-container" id="arcada-inferior-derecha"></div>
+              <div
+                class="dientes-container"
+                id="arcada-inferior-izquierda"
+              ></div>
+              <div class="dientes-container" id="arcada-inferior-derecha"></div>
             </div>
-            </div>
-            <div class="barra-inferior">
-                <div class="arcada-title">ARCADA INFERIOR</div>
-                <div></div>
-            </div>
-            
+          </div>
+          <div class="barra-inferior">
+            <div class="arcada-title">ARCADA INFERIOR</div>
+            <div></div>
+          </div>
         </div>
-
+      </div>
     </div>
-</div>
-
-</body>
+  </body>
 </html>

@@ -40,14 +40,15 @@ function inicializarDientes() {
   });
 }
 
-function crearDienteHTML(numero, mostrarNombres = false) {
+function crearDienteHTML(numero, mostrarNombresFilas = false, mostrarNombresVP = false) {
 
   const esInferior = numero === 48;
+  const esInferiorV = numero === 38;
 
   return `
     <div class="diente-wrapper">
     
-      ${mostrarNombres ? `
+      ${mostrarNombresFilas ? `
         <div class="titulos-fila ${esInferior ? 'invertido' : ''}">
           <div class="titulo">Movilidad</div>
           <div class="titulo">Furca</div>
@@ -166,26 +167,25 @@ function crearDienteHTML(numero, mostrarNombres = false) {
         </div>
 
     </div>
-    </div>`
+    </div>
+    
+    ${mostrarNombresVP ? `
+      <div class="titulos-segmento ${esInferiorV ? 'invertido' : ''}">
+          <div class="segmento">Vestibular</div>
+          <div class="segmento">${esInferiorV ? 'Lingual' : 'Palatino'}</div>
+        </div>
+      ` : ""}`
 }
 
 function renderizar(lista, contenedor) {
   document.getElementById(contenedor).innerHTML = lista
     .map((num) => {
-      const mostrarNombres = num === 18 || num === 48; // solo dientes a la izquierda
-      return crearDienteHTML(num, mostrarNombres);
+      const mostrarNombresFilas = num === 18 || num === 48; // solo dientes a la izquierda
+      const mostrarNombresVP = num === 28 || num === 38; 
+      return crearDienteHTML(num, mostrarNombresFilas, mostrarNombresVP);
     })
     .join("");
 }
-
-// function actualizarValor(diente, cara, pos, valor) {
-//   const pref = cara === "vestibular" ? "v" : "p";
-//   const el = document.getElementById(`${diente}-${pref}-${pos}`);
-//   el.textContent = valor;
-//   el.classList.add("filled");
-//   if (valor >= 6) el.classList.add("danger");
-//   else if (valor >= 4) el.classList.add("warning");
-// }
 
 function setInputValue(id, valor) {
   const el = document.getElementById(id);
