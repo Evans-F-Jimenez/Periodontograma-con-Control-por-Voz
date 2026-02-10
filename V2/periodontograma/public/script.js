@@ -516,9 +516,36 @@ function autoGuardar() {
   }, 800);
 }
 
+async function cargarDesdeBackend() {
+  try {
+    const res = await fetch(
+      `/api/periodontograma/${periodontogramaId}?ts=${Date.now()}`,
+      { cache: "no-store" }
+    );
 
-window.onload = () => {
-  inicializarDientes();
+    if (!res.ok) throw new Error("No se pudo cargar");
+
+    const data = await res.json();
+
+    // 🔥 SINCRONIZA EL MODELO
+    Object.keys(dientes).forEach(k => delete dientes[k]);
+    Object.assign(dientes, data);
+
+    limpiarPeriodontograma();
+    cargarPeriodontogramaDesdeObjeto(dientes);
+
+    ultimoSnapshot = JSON.stringify(dientes);
+
+    console.log("✔ Modelo sincronizado con backend");
+
+  } catch (err) {
+    console.error("Error cargando backend:", err);
+  }
+}
+
+
+window.onload =  async() => {
+  // inicializarDientes();
 
   // Arcada superior normal
   renderizar(supIzq, "arcada-superior-izquierda");
@@ -531,7 +558,8 @@ window.onload = () => {
   inicializarEventosValores();
   inicializarEventosDientes();
 
-  refrescarPeriodontograma();
+  await cargarDesdeBackend();
+  //refrescarPeriodontograma();
 
   document.addEventListener("input", (e) => {
   const id = e.target.id;

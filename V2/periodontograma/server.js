@@ -1,6 +1,5 @@
 const express = require("express");
 const path = require("path");
-const fs = require("fs");
 
 const Periodontograma = require("./core/Periodontograma");
 const CommandProcessor = require("./core/CommandProcessor");
@@ -12,92 +11,88 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-// ================= CORE =================
-const perio = new Periodontograma();
-// const perio = new Periodontograma('2026-02-10');
-const processor = new CommandProcessor(perio);
-const periodos = {}; // almacenamiento en memoria por ID
+// ================= ALMACENAMIENTO EN MEMORIA =================
+// Guarda instancias por ID mientras el servidor esté vivo
+const periodos = {};
 
+// Obtener o crear periodontograma por ID
+function obtenerPerio(id) {
+    if (!id) {
+        throw new Error("ID requerido");
+    }
+
+    if (!periodos[id]) {
+        console.log("📂 Cargando periodontograma:", id);
+        periodos[id] = new Periodontograma(id);
+    }
+
+    return periodos[id];
+}
 
 // ================= API =================
 
-// Procesar comando (texto o voz)
-app.post("/api/comando", (req, res) => {
-    const { texto } = req.body;
-    if (!texto) return res.status(400).json({ error: "Texto requerido" });
-
-    const result = processor.procesar(texto);
-    res.json({ ok: true, result });
-});
-
-// Exportar JSON
-app.get("/api/exportar", (req, res) => {
-    const file = perio.exportarJSON();
-    res.json({ ok: true, file });
-});
-
-// Obtener periodontograma
-app.get("/api/periodontograma/:id", (req, res) => {
-    const filePath = path.join(
-        __dirname,
-        "public",
-        "Data",
-        `periodontograma_${req.params.id}.json`
-    );
-
-    if (!fs.existsSync(filePath)) {
-        return res.status(404).json({ error: "No encontrado" });
-    }
-
-    res.sendFile(filePath);
-});
-
-// // Guardar periodontograma (desde UI)
-// app.post("/api/periodontograma/:id", (req, res) => {
-//     const id = req.params.id;
-//     const data = req.body;
-
-//     if (!data || typeof data !== "object") {
-//         return res.status(400).json({ error: "Datos inválidos" });
-//     }
-
-//     const dirPath = path.join(__dirname, "public", "Data");
-
-//     // Crear carpeta si no existe
-//     if (!fs.existsSync(dirPath)) {
-//         fs.mkdirSync(dirPath, { recursive: true });
-//     }
-
-//     const filePath = path.join(
-//         dirPath,
-//         `periodontograma_${id}.json`
-//     );
-
-//     try {
-//         fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-//         res.json({ ok: true });
-//     } catch (err) {
-//         console.error("Error guardando:", err);
-//         res.status(500).json({ error: "Error guardando archivo" });
-//     }
-// });
-
-app.post("/api/periodontograma/:id", (req, res) => {
-    const filePath = path.join(
-        __dirname,
-        "public",
-        "Data",
-        `periodontograma_${req.params.id}.json`
-    );
-
+// 🔹 Procesar comando (texto o voz)
+app.post("/api/comando/:id", (req, res) => {
     try {
-        fs.writeFileSync(filePath, JSON.stringify(req.body, null, 2));
-        res.json({ ok: true });
+        const { texto } = req.body;
+        const { id } = req.params;
+
+        if (!texto) {
+            return res.status(400).json({ error: "Texto requerido" });
+        }
+
+        const perio = obtenerPerio(id);
+        const processor = new CommandProcessor(perio);
+
+        const result = processor.procesar(texto);
+
+        // Guardado automático después de procesar comando
+        perio.guardarJSON();
+
+        res.json({ ok: true, result });
+
     } catch (err) {
+        console.error("Error procesando comando:", err);
+        res.status(500).json({ ok: false, error: "Error interno" });
+    }
+});
+
+// 🔹 Obtener periodontograma
+app.get("/api/periodontograma/:id", (req, res) => {
+    try {
+        const { id } = req.params;
+        const perio = obtenerPerio(id);
+
+        res.json(perio.dientes);
+
+    } catch (err) {
+        console.error("Error obteniendo periodontograma:", err);
+        res.status(500).json({ ok: false, error: "Error interno" });
+    }
+});
+
+// 🔹 Guardar desde UI (cuando frontend hace cambios manuales)
+app.post("/api/periodontograma/:id", (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = req.body;
+
+        if (!data || typeof data !== "object") {
+            return res.status(400).json({ error: "Datos inválidos" });
+        }
+
+        const perio = obtenerPerio(id);
+
+        perio.dientes = data;
+        perio.guardarJSON();
+
+        res.json({ ok: true });
+
+    } catch (err) {
+        console.error("Error guardando periodontograma:", err);
         res.status(500).json({ ok: false, error: "Error guardando" });
     }
 });
-
 
 // ================= START =================
 app.listen(PORT, () => {
