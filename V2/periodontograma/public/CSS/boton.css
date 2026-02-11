@@ -1,14 +1,26 @@
-.button-container {
+.button-container, .button-container-guardar {
   margin-top: 8px;
   margin-bottom: 4px;
   margin-left: 1105px;
   padding: 4px 8px;
   font-size: 14px;
   cursor: pointer;
-  background: linear-gradient(135deg, #667eea 0%, #082ad7 100%);
-  color: white;
+  background: none;
+  color: black;
   font-weight: bold;
   border-radius: 5px;
-  border: none;
+  border: solid #082ad7;
   white-space: nowrap;
+  transition: color 0.1s ease, background 0.3s ease;
+}
+
+.button-container:hover, .button-container-guardar:hover {
+  background: #082ad7;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: color 0.3s ease, background 0.5s ease, box-shadow 0.3s ease;
+}
+
+.button-container-guardar {
+  margin-right: 70px;
 }
