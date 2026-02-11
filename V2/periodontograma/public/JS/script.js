@@ -11,7 +11,7 @@ const infIzq = [48, 47, 46, 45, 44, 43, 42, 41];
 const infDer = [31, 32, 33, 34, 35, 36, 37, 38];
 
 const SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
+  window.SpeechRecognition || window.webkitSpeechRecognition;
 
 function inicializarDientes() {
   [...supIzq, ...supDer, ...infIzq, ...infDer].forEach((n) => {
@@ -26,7 +26,7 @@ function inicializarDientes() {
         margenGingival: [0, 0, 0],
         profundidadSondaje: [0, 0, 0],
         NIC: [0, 0, 0],
-        furca: 0
+        furca: 0,
       },
       palatino: {
         placa: [false, false, false],
@@ -34,22 +34,27 @@ function inicializarDientes() {
         margenGingival: [0, 0, 0],
         profundidadSondaje: [0, 0, 0],
         NIC: [0, 0, 0],
-        furca: 0
-      }
+        furca: 0,
+      },
     };
   });
 }
 
-function crearDienteHTML(numero, mostrarNombresFilas = false, mostrarNombresVP = false) {
-
+function crearDienteHTML(
+  numero,
+  mostrarNombresFilas = false,
+  mostrarNombresVP = false,
+) {
   const esInferior = numero === 48;
   const esInferiorV = numero === 38;
 
   return `
     <div class="diente-wrapper">
     
-      ${mostrarNombresFilas ? `
-        <div class="titulos-fila ${esInferior ? 'invertido' : ''}">
+      ${
+        mostrarNombresFilas
+          ? `
+        <div class="titulos-fila ${esInferior ? "invertido" : ""}">
           <div class="titulo">Movilidad</div>
           <div class="titulo">Furca</div>
           <div class="titulo">Sangrado</div>
@@ -66,7 +71,9 @@ function crearDienteHTML(numero, mostrarNombresFilas = false, mostrarNombresVP =
           <div class="titulo">Sangrado</div>
           <div class="titulo">Furca</div>
         </div>
-      ` : ""}
+      `
+          : ""
+      }
 
       
     <div class="diente">
@@ -169,19 +176,23 @@ function crearDienteHTML(numero, mostrarNombresFilas = false, mostrarNombresVP =
     </div>
     </div>
     
-    ${mostrarNombresVP ? `
-      <div class="titulos-segmento ${esInferiorV ? 'invertido' : ''}">
+    ${
+      mostrarNombresVP
+        ? `
+      <div class="titulos-segmento ${esInferiorV ? "invertido" : ""}">
           <div class="segmento">Vestibular</div>
-          <div class="segmento">${esInferiorV ? 'Lingual' : 'Palatino'}</div>
+          <div class="segmento">${esInferiorV ? "Lingual" : "Palatino"}</div>
         </div>
-      ` : ""}`
+      `
+        : ""
+    }`;
 }
 
 function renderizar(lista, contenedor) {
   document.getElementById(contenedor).innerHTML = lista
     .map((num) => {
       const mostrarNombresFilas = num === 18 || num === 48; // solo dientes a la izquierda
-      const mostrarNombresVP = num === 28 || num === 38; 
+      const mostrarNombresVP = num === 28 || num === 38;
       return crearDienteHTML(num, mostrarNombresFilas, mostrarNombresVP);
     })
     .join("");
@@ -273,7 +284,6 @@ async function refrescarPeriodontograma() {
 
 function cargarPeriodontogramaDesdeObjeto(data) {
   Object.entries(data).forEach(([num, d]) => {
-
     if (d.ausente) {
       marcarAusente(num);
       return;
@@ -351,15 +361,14 @@ function limpiarPeriodontograma() {
     box.classList.remove("implante");
   });
 
-  document.querySelectorAll(".diente-box").forEach(box => {
-  box.classList.remove("implante");
-});
+  document.querySelectorAll(".diente-box").forEach((box) => {
+    box.classList.remove("implante");
+  });
 
-
-  document.querySelectorAll(".valor").forEach(v => {
-  v.classList.remove("placa-activa");
-  v.classList.remove("sangrado-activa");
-});
+  document.querySelectorAll(".valor").forEach((v) => {
+    v.classList.remove("placa-activa");
+    v.classList.remove("sangrado-activa");
+  });
 
   document.querySelectorAll(".extra-info").forEach((i) => (i.textContent = ""));
 
@@ -370,7 +379,7 @@ function limpiarPeriodontograma() {
 }
 
 function inicializarEventosValores() {
-  document.querySelectorAll(".valor").forEach(el => {
+  document.querySelectorAll(".valor").forEach((el) => {
     el.addEventListener("click", () => {
       manejarClickValor(el);
     });
@@ -378,7 +387,7 @@ function inicializarEventosValores() {
 }
 
 function inicializarEventosDientes() {
-  document.querySelectorAll(".diente-box").forEach(box => {
+  document.querySelectorAll(".diente-box").forEach((box) => {
     box.addEventListener("click", () => {
       manejarClickDiente(box);
     });
@@ -386,22 +395,22 @@ function inicializarEventosDientes() {
 }
 
 async function enviarComando(texto) {
-        console.log("➡️ Enviando: " + texto);
-        try {
-          const res = await fetch(`/api/comando/${periodontogramaId}`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ texto }),
-          });
-          const data = await res.json();
-          console.log("✅ Respuesta: " + JSON.stringify(data));
-        } catch (e) {
-          console.log("❌ Error: " + e.message);
-        }
-      }
+  console.log("➡️ Enviando: " + texto);
+  try {
+    const res = await fetch(`/api/comando/${periodontogramaId}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ texto }),
+    });
+    const data = await res.json();
+    console.log("✅ Respuesta: " + JSON.stringify(data));
+  } catch (e) {
+    console.log("❌ Error: " + e.message);
+  }
+}
 
 function manejarClickValor(el) {
-  const id = el.id; 
+  const id = el.id;
 
   const [num, tipo, index] = id.split("-");
   const cara = tipo.includes("v") ? "vestibular" : "palatino";
@@ -411,12 +420,24 @@ function manejarClickValor(el) {
 
   if (esPlaca) {
     el.classList.toggle("placa-activa");
-    actualizarModelo(num, cara, "placa", index, el.classList.contains("placa-activa"));
+    actualizarModelo(
+      num,
+      cara,
+      "placa",
+      index,
+      el.classList.contains("placa-activa"),
+    );
   }
 
   if (esSangrado) {
     el.classList.toggle("sangrado-activa");
-    actualizarModelo(num, cara, "sangrado", index, el.classList.contains("sangrado-activa"));
+    actualizarModelo(
+      num,
+      cara,
+      "sangrado",
+      index,
+      el.classList.contains("sangrado-activa"),
+    );
   }
 }
 
@@ -437,13 +458,11 @@ function manejarClickDiente(box) {
   if (estadoActual === "normal") {
     nuevoEstado = "ausente";
     diente.classList.add("ausente");
-  } 
-  else if (estadoActual === "ausente") {
+  } else if (estadoActual === "ausente") {
     nuevoEstado = "implante";
     box.classList.add("implante");
     info.textContent = "IMP";
-  } 
-  else {
+  } else {
     nuevoEstado = "normal";
   }
 
@@ -477,16 +496,13 @@ function actualizarEstadoModelo(num, estado) {
 
 async function guardarPeriodontograma() {
   try {
-    const res = await fetch(
-      `/api/periodontograma/${periodontogramaId}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dientes),
-      }
-    );
+    const res = await fetch(`/api/periodontograma/${periodontogramaId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dientes),
+    });
 
     const result = await res.json();
     console.log("Guardado:", result);
@@ -523,7 +539,7 @@ async function cargarDesdeBackend() {
   try {
     const res = await fetch(
       `/api/periodontograma/${periodontogramaId}?ts=${Date.now()}`,
-      { cache: "no-store" }
+      { cache: "no-store" },
     );
 
     if (!res.ok) throw new Error("No se pudo cargar");
@@ -531,7 +547,7 @@ async function cargarDesdeBackend() {
     const data = await res.json();
 
     // 🔥 SINCRONIZA EL MODELO
-    Object.keys(dientes).forEach(k => delete dientes[k]);
+    Object.keys(dientes).forEach((k) => delete dientes[k]);
     Object.assign(dientes, data);
 
     limpiarPeriodontograma();
@@ -540,14 +556,12 @@ async function cargarDesdeBackend() {
     ultimoSnapshot = JSON.stringify(dientes);
 
     console.log("✔ Modelo sincronizado con backend");
-
   } catch (err) {
     console.error("Error cargando backend:", err);
   }
 }
 
-
-window.onload =  async() => {
+window.onload = async () => {
   // inicializarDientes();
 
   // Arcada superior normal
@@ -564,143 +578,136 @@ window.onload =  async() => {
   await cargarDesdeBackend();
   //refrescarPeriodontograma();
 
-   if (SpeechRecognition) {
-         const recognition = new SpeechRecognition();
-         recognition.lang = "es-ES";
-         recognition.interimResults = false;
+  if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+    recognition.lang = "es-ES";
+    recognition.interimResults = false;
 
-         document.getElementById("voz").addEventListener("click", () => {
-           console.log("🎙️ Escuchando...");
-           recognition.start();
-         });
+    document.getElementById("voz").addEventListener("click", () => {
+      console.log("🎙️ Escuchando...");
+      recognition.start();
+    });
 
-         recognition.addEventListener("result", (e) => {
-           const texto = e.results[0][0].transcript;
-           console.log("🎤 Reconocido: " + texto);
-           enviarComando(texto);
-         });
-       recognition.addEventListener("error", (e) => {
-         console.log("⚠️ Error en reconocimiento: " + e.error);
-       });
-         recognition.addEventListener("end", () => {
-           console.log("ℹ️ Reconocimiento finalizado. Puedes hablar de nuevo.");
-         });
-       } else {
-         console.log("⚠️ Tu navegador no soporta SpeechRecognition");
-       }
+    recognition.addEventListener("result", (e) => {
+      const texto = e.results[0][0].transcript;
+      console.log("🎤 Reconocido: " + texto);
+      enviarComando(texto);
+    });
+    recognition.addEventListener("error", (e) => {
+      console.log("⚠️ Error en reconocimiento: " + e.error);
+    });
+    recognition.addEventListener("end", () => {
+      console.log("ℹ️ Reconocimiento finalizado. Puedes hablar de nuevo.");
+    });
+  } else {
+    console.log("⚠️ Tu navegador no soporta SpeechRecognition");
+  }
 
   document.addEventListener("input", (e) => {
-  const id = e.target.id;
-  if (!id) return;
+    const id = e.target.id;
+    if (!id) return;
 
-  const partes = id.split("-");
-  const num = partes[0];
+    const partes = id.split("-");
+    const num = partes[0];
 
-  if (!dientes[num]) return;
+    if (!dientes[num]) return;
 
-  const valor = Number(e.target.value) || 0;
+    const valor = Number(e.target.value) || 0;
 
-  // =========================
-  // MOVILIDAD
-  // =========================
-  if (id.includes("movilidad")) {
-    dientes[num].movilidad = valor;
-  }
+    // =========================
+    // MOVILIDAD
+    // =========================
+    if (id.includes("movilidad")) {
+      dientes[num].movilidad = valor;
+    }
 
-  // =========================
-  // ANCHURA ENCÍA
-  // =========================
-  if (id.includes("anchura_encia")) {
-    dientes[num].anchuraEncia = valor;
-  }
+    // =========================
+    // ANCHURA ENCÍA
+    // =========================
+    if (id.includes("anchura_encia")) {
+      dientes[num].anchuraEncia = valor;
+    }
 
-  // =========================
-  // FURCA VESTIBULAR
-  // =========================
-  if (id.includes("furca_v")) {
-    if (!dientes[num].vestibular) dientes[num].vestibular = {};
-    dientes[num].vestibular.furca = valor;
-  }
+    // =========================
+    // FURCA VESTIBULAR
+    // =========================
+    if (id.includes("furca_v")) {
+      if (!dientes[num].vestibular) dientes[num].vestibular = {};
+      dientes[num].vestibular.furca = valor;
+    }
 
-  // =========================
-  // FURCA PALATINO
-  // =========================
-  if (id.includes("furca_p")) {
-    if (!dientes[num].palatino) dientes[num].palatino = {};
-    dientes[num].palatino.furca = valor;
-  }
+    // =========================
+    // FURCA PALATINO
+    // =========================
+    if (id.includes("furca_p")) {
+      if (!dientes[num].palatino) dientes[num].palatino = {};
+      dientes[num].palatino.furca = valor;
+    }
 
-  // =========================
-  // MARGEN GINGIVAL VESTIBULAR (mgv)
-  // =========================
-  if (id.includes("mgv")) {
-    const index = Number(partes[2]);
-    if (!dientes[num].vestibular.margenGingival)
-      dientes[num].vestibular.margenGingival = [0, 0, 0];
+    // =========================
+    // MARGEN GINGIVAL VESTIBULAR (mgv)
+    // =========================
+    if (id.includes("mgv")) {
+      const index = Number(partes[2]);
+      if (!dientes[num].vestibular.margenGingival)
+        dientes[num].vestibular.margenGingival = [0, 0, 0];
 
-    dientes[num].vestibular.margenGingival[index] = valor;
-  }
+      dientes[num].vestibular.margenGingival[index] = valor;
+    }
 
-  // =========================
-  // MARGEN GINGIVAL PALATINO (mgp)
-  // =========================
-  if (id.includes("mgp")) {
-    const index = Number(partes[2]);
-    if (!dientes[num].palatino.margenGingival)
-      dientes[num].palatino.margenGingival = [0, 0, 0];
+    // =========================
+    // MARGEN GINGIVAL PALATINO (mgp)
+    // =========================
+    if (id.includes("mgp")) {
+      const index = Number(partes[2]);
+      if (!dientes[num].palatino.margenGingival)
+        dientes[num].palatino.margenGingival = [0, 0, 0];
 
-    dientes[num].palatino.margenGingival[index] = valor;
-  }
+      dientes[num].palatino.margenGingival[index] = valor;
+    }
 
-  // =========================
-  // PROFUNDIDAD VESTIBULAR (psv)
-  // =========================
-  if (id.includes("psv")) {
-    const index = Number(partes[2]);
-    if (!dientes[num].vestibular.profundidadSondaje)
-      dientes[num].vestibular.profundidadSondaje = [0, 0, 0];
+    // =========================
+    // PROFUNDIDAD VESTIBULAR (psv)
+    // =========================
+    if (id.includes("psv")) {
+      const index = Number(partes[2]);
+      if (!dientes[num].vestibular.profundidadSondaje)
+        dientes[num].vestibular.profundidadSondaje = [0, 0, 0];
 
-    dientes[num].vestibular.profundidadSondaje[index] = valor;
-  }
+      dientes[num].vestibular.profundidadSondaje[index] = valor;
+    }
 
-  // =========================
-  // PROFUNDIDAD PALATINO (psp)
-  // =========================
-  if (id.includes("psp")) {
-    const index = Number(partes[2]);
-    if (!dientes[num].palatino.profundidadSondaje)
-      dientes[num].palatino.profundidadSondaje = [0, 0, 0];
+    // =========================
+    // PROFUNDIDAD PALATINO (psp)
+    // =========================
+    if (id.includes("psp")) {
+      const index = Number(partes[2]);
+      if (!dientes[num].palatino.profundidadSondaje)
+        dientes[num].palatino.profundidadSondaje = [0, 0, 0];
 
-    dientes[num].palatino.profundidadSondaje[index] = valor;
-  }
+      dientes[num].palatino.profundidadSondaje[index] = valor;
+    }
 
-  // =========================
-  // NIC VESTIBULAR (NV)
-  // =========================
-  if (id.includes("NV")) {
-    const index = Number(partes[2]);
-    if (!dientes[num].vestibular.NIC)
-      dientes[num].vestibular.NIC = [0, 0, 0];
+    // =========================
+    // NIC VESTIBULAR (NV)
+    // =========================
+    if (id.includes("NV")) {
+      const index = Number(partes[2]);
+      if (!dientes[num].vestibular.NIC) dientes[num].vestibular.NIC = [0, 0, 0];
 
-    dientes[num].vestibular.NIC[index] = valor;
-  }
+      dientes[num].vestibular.NIC[index] = valor;
+    }
 
-  // =========================
-  // NIC PALATINO (NP)
-  // =========================
-  if (id.includes("NP")) {
-    const index = Number(partes[2]);
-    if (!dientes[num].palatino.NIC)
-      dientes[num].palatino.NIC = [0, 0, 0];
+    // =========================
+    // NIC PALATINO (NP)
+    // =========================
+    if (id.includes("NP")) {
+      const index = Number(partes[2]);
+      if (!dientes[num].palatino.NIC) dientes[num].palatino.NIC = [0, 0, 0];
 
-    dientes[num].palatino.NIC[index] = valor;
-  }
+      dientes[num].palatino.NIC[index] = valor;
+    }
 
-  autoGuardar();
-});
-
-
-
-  // 🔄 refresco cada 2 segundos (ajustable)
-  // setInterval(refrescarPeriodontograma, 2000);
+    autoGuardar();
+  });
 };
