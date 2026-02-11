@@ -41,7 +41,8 @@
     <div id="log"></div>
 
     <script>
-      let periodontogramaId = "2026-02-10";
+      const formattedDate = new Date().toISOString().split('T')[0];
+      let periodontogramaId = formattedDate;
       const log = document.getElementById("log");
       const comandoInput = document.getElementById("comando");
 
