@@ -1,0 +1,64 @@
+/* ================= CUERPO ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #cbcbcb 0%, #cbcbcb 100%);
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1600px;
+    margin: auto;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #082ad7 100%);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.main-content {
+    padding: 30px;
+    background: #f8f9fa;
+}
+
+.campo {
+    width: 20.5px;
+    height: 18px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.campo.unico {
+    width: 30px;
+}
+
+.campo.filled {
+    background: white;
+    color: black;
+}
+
+input {
+            text-align: center;   /* Centers the text horizontally */
+            padding: 6px;
+            font-size: 10px;
+            width: 200px;
+        }
+
+

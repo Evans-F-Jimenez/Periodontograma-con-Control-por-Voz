@@ -1,0 +1,76 @@
+/* ==================== DIENTES ==================== */
+.dientes-container {
+    display: flex;
+    gap: 4px;
+}
+
+.diente {
+    width: 70px;
+    text-align: center;
+    border: 0.5px solid #33333322;
+}
+
+.diente-box {
+    border: 1px solid #333;
+    margin: 4px 0;
+    padding: 3px 1px;
+    border-radius: 2px;
+    min-height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.diente-box.implante {
+  border: 1px solid #333;
+  background: #e3f2fd;
+  font-size: 8px;
+}
+
+.diente-box.implante .numero-diente {
+  font-weight: bold;
+}
+
+.diente-box.implante::after {
+  top: -1px;
+  right: -7px;
+  font-size: 1px;
+}
+
+.diente.ausente .fila,
+.diente.ausente .valores-sangrado,
+.diente.ausente .valores-placa {
+  visibility: hidden;     /* oculta */
+  pointer-events: none;
+}
+
+.diente.ausente .diente-box {
+  visibility: visible;    /* se mantiene */
+  opacity: 0.5;
+}
+
+.diente-box {
+  position: relative;
+}
+
+.diente.ausente .diente-box::after {
+  content: "";
+  position: absolute;
+  top: 47%;
+  left: -10%;
+  width: 120%;
+  height: 3px;
+  background: #333;
+  transform: rotate(-30deg);
+  transform-origin: center;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.diente-wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.numero-diente { font-weight: bold; }
+.extra-info { font-size: 8px; color: #666; }

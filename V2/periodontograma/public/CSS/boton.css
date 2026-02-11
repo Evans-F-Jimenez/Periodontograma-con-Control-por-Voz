@@ -1,0 +1,14 @@
+.button-container {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  margin-left: 1105px;
+  padding: 4px 8px;
+  font-size: 14px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #667eea 0%, #082ad7 100%);
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  white-space: nowrap;
+}
