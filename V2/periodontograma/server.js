@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const formattedDate = new Date().toISOString().split('T')[0];
 
 const Periodontograma = require("./core/Periodontograma");
 const CommandProcessor = require("./core/CommandProcessor");
@@ -16,7 +17,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const periodos = {};
 
 // Obtener o crear periodontograma por ID
-function obtenerPerio(id) {
+function obtenerPerio(id = formattedDate) {
     if (!id) {
         throw new Error("ID requerido");
     }

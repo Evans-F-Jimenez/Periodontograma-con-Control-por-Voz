@@ -1,5 +1,8 @@
+const formattedDate = new Date().toISOString().split('T')[0];
+
 let ultimoSnapshot = null;
-let periodontogramaId = "2026-02-10";
+let PacienteID = "";
+let periodontogramaId = formattedDate;
 let autoSaveTimeout = null;
 
 const dientes = {};

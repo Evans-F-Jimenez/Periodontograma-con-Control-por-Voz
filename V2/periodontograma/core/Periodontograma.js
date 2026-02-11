@@ -1,10 +1,10 @@
 const fs = require("fs");
 const path = require("path");
-let id_perio = "2026-02-10";
+//let id_perio = "2026-02-10";
 
 class Periodontograma {
     
-    constructor(id = id_perio) {
+    constructor(id) {
 
         if (!id) {
             throw new Error("Se requiere un ID para el periodontograma");
