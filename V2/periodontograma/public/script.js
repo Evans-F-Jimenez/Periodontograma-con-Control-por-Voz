@@ -192,9 +192,6 @@ function setInputValue(id, valor) {
   if (!el) return;
   el.value = valor;
   el.classList.add("filled");
-
-//  if (Number(valor) >= 6) el.classList.add("danger");
- // else if (Number(valor) >= 4) el.classList.add("warning");
 }
 
 function marcarImplante(num) {
@@ -246,8 +243,7 @@ function marcarSangrado(num, cara, index, valor) {
 
   const pref = cara === "vestibular" ? "sv" : "sp";
   const el = document.getElementById(`${num}-${pref}-${index}`);
-  // console.log("Intentando marcar:", `${num}-${pref}-${index}`);
-  // console.log(document.getElementById(`${num}-${pref}-${index}`));
+
   if (!el) return;
 
   el.classList.add("sangrado-activa");
@@ -277,10 +273,6 @@ async function refrescarPeriodontograma() {
 
 function cargarPeriodontogramaDesdeObjeto(data) {
   Object.entries(data).forEach(([num, d]) => {
-    // if (d.ausente) {
-    //   ocultarFilasDiente(num);
-    //   return;
-    // }
 
     if (d.ausente) {
       marcarAusente(num);
@@ -309,7 +301,6 @@ function cargarPeriodontogramaDesdeObjeto(data) {
 
     d.vestibular?.placa?.forEach((v, i) => {
       marcarPlaca(num, "vestibular", i, v);
-      // console.log("SANGRADO:", num, d.vestibular?.sangrado);
     });
 
     d.palatino?.placa?.forEach((v, i) => {
@@ -411,7 +402,6 @@ async function enviarComando(texto) {
 
 function manejarClickValor(el) {
   const id = el.id; 
-  // Ejemplo: "18-pv-0" o "18-sp-1"
 
   const [num, tipo, index] = id.split("-");
   const cara = tipo.includes("v") ? "vestibular" : "palatino";
@@ -460,8 +450,6 @@ function manejarClickDiente(box) {
   actualizarEstadoModelo(num, nuevoEstado);
 }
 
-
-
 function obtenerEstadoDiente(diente) {
   const box = diente.querySelector(".diente-box");
 
@@ -469,8 +457,6 @@ function obtenerEstadoDiente(diente) {
   if (box.classList.contains("implante")) return "implante";
   return "normal";
 }
-
-
 
 function actualizarModelo(num, cara, propiedad, index, valor) {
   if (!dientes[num][cara][propiedad]) {
@@ -488,7 +474,6 @@ function actualizarEstadoModelo(num, estado) {
 
   autoGuardar();
 }
-
 
 async function guardarPeriodontograma() {
   try {
