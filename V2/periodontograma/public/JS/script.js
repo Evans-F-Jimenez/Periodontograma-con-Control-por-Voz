@@ -13,33 +13,6 @@ const infDer = [31, 32, 33, 34, 35, 36, 37, 38];
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
-function inicializarDientes() {
-  [...supIzq, ...supDer, ...infIzq, ...infDer].forEach((n) => {
-    dientes[n] = {
-      ausente: false,
-      implante: false,
-      movilidad: 0,
-      anchuraEncia: 0,
-      vestibular: {
-        placa: [false, false, false],
-        sangrado: [false, false, false],
-        margenGingival: [0, 0, 0],
-        profundidadSondaje: [0, 0, 0],
-        NIC: [0, 0, 0],
-        furca: 0,
-      },
-      palatino: {
-        placa: [false, false, false],
-        sangrado: [false, false, false],
-        margenGingival: [0, 0, 0],
-        profundidadSondaje: [0, 0, 0],
-        NIC: [0, 0, 0],
-        furca: 0,
-      },
-    };
-  });
-}
-
 function crearDienteHTML(
   numero,
   mostrarNombresFilas = false,
@@ -213,21 +186,6 @@ function marcarImplante(num) {
 
   box.classList.add("implante");
   info.textContent = "IMP";
-}
-
-function ocultarFilasDiente(num) {
-  const diente = document.getElementById(`box-${num}`)?.closest(".diente");
-
-  if (!diente) return;
-
-  diente.classList.add("ausente");
-
-  // Oculta todo excepto la caja del diente
-  [...diente.children].forEach((child) => {
-    if (!child.classList.contains("diente-box")) {
-      child.style.display = "none";
-    }
-  });
 }
 
 function marcarAusente(num) {
