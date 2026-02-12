@@ -1,3 +1,5 @@
+const { text } = require("express");
+
 class CommandProcessor {
     constructor(perio) {
         this.perio = perio;
@@ -264,17 +266,23 @@ class CommandProcessor {
         // ==========================================
         // ANCHURA DE ENCÍA
         // ==========================================
-        if ((texto.includes("encía") || texto.includes("encia"))
-            && numeros.length > 0) {
-
-            return this.ejecutarYGuardar(
+        if ((texto.includes("encía") || texto.includes("encia")) && numeros.length > 0) {
+            if (texto.includes("limpiar") || texto.includes("borrar") || texto.includes("eliminar")) {
+                return this.ejecutarYGuardar(
+                this.perio.registrarAnchuraEncia(
+                    numDiente,
+                    0
+                )
+            )}
+            else{
+                return this.ejecutarYGuardar(
                 this.perio.registrarAnchuraEncia(
                     numDiente,
                     numeros[0]
                 )
-            );
+            )
+            }
         }
-
         return false;
     }
 }
