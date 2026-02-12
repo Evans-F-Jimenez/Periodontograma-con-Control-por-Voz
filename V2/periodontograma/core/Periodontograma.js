@@ -96,17 +96,17 @@ class Periodontograma {
     // MÉTODOS CLÍNICOS
     // ===============================
 
-    marcarAusente(diente) {
+    marcarAusente(diente, estado) {
         if (this.dientes[diente]) {
-            this.dientes[diente].ausente = true;
+            this.dientes[diente].ausente = estado;
             return true;
         }
         return false;
     }
 
-    marcarImplante(diente) {
+    marcarImplante(diente, estado) {
         if (this.dientes[diente]) {
-            this.dientes[diente].implante = true;
+            this.dientes[diente].implante = estado;
             return true;
         }
         return false;
@@ -125,20 +125,24 @@ class Periodontograma {
         return false;
     }
 
-    registrarMovilidad(diente, grado) {
-        if (this.dientes[diente] && grado >= 0 && grado <= 3) {
+    registrarMovilidad(diente, grado, accion) {
+        if (this.dientes[diente] && grado >= 0 && grado <= 3 && accion === "registrar") {
             this.dientes[diente].movilidad = grado;
+            return true;
+        }
+        if (this.dientes[diente] && accion === "limpiar") {
+            this.dientes[diente].movilidad = 0;
             return true;
         }
         return false;
     }
 
-    registrarFurca(diente, cara, grado) {
+    registrarFurca(diente, cara, grado, accion) {
         if (!this.dientes[diente] || this.dientes[diente].ausente) return false;
 
         const caraReal = cara === "lingual" ? "palatino" : cara;
 
-        if (grado >= 0 && grado <= 3) {
+        if (accion === "registrar" && grado >= 0 && grado <= 3) {
             this.dientes[diente][caraReal].furca = grado;
             return true;
         }
