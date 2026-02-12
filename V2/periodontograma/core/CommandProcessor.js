@@ -132,7 +132,7 @@ class CommandProcessor {
         // ==========================================
         // MOVILIDAD
         // ==========================================
-        if (texto.includes("movilidad") && numeros.length > 0) {
+        if (texto.includes("movilidad") && numeros.length >= 0) {
 
             const grado = numeros.find(n => n <= 3);
 
@@ -146,8 +146,7 @@ class CommandProcessor {
         // ==========================================
         // FURCA
         // ==========================================
-        if ((texto.includes("furca") || texto.includes("furcación"))
-            && numeros.length > 0 && cara) {
+        if ((texto.includes("furca") || texto.includes("furcación")) && numeros.length >= 0 && cara) {
 
             const grado = numeros.find(n => n >= 0 && n <= 3);
 
@@ -265,8 +264,9 @@ class CommandProcessor {
 
         // ==========================================
         // ANCHURA DE ENCÍA
-        // ==========================================
-        if ((texto.includes("encía") || texto.includes("encia")) && numeros.length > 0) {
+        // ========================================== 
+        // // Cambiar el orden, si detecta limpiar primero se limpiar, y si no busca el numero
+        if ((texto.includes("encía") || texto.includes("encia")) && numeros.length >= 0) {
             if (texto.includes("limpiar") || texto.includes("borrar") || texto.includes("eliminar")) {
                 return this.ejecutarYGuardar(
                 this.perio.registrarAnchuraEncia(
