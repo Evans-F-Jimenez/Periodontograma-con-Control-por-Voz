@@ -6,8 +6,8 @@ class CommandProcessor {
 
         this.caras = {
             vestibular: ["vestibular", "bucal", "vesti"],
-            palatino: ["palatino", "palatina", "pala"],
-            lingual: ["lingual", "lingu"]
+            palatino: ["palatino", "palatina", "pala", "lingual", "lingu"],
+            // Palatino es lo mismo que lingual, solo que la parte de abajo. lingual: ["lingual", "lingu"]
         };
 
         this.posiciones = {
@@ -70,14 +70,26 @@ class CommandProcessor {
         // ---------- AUSENTE ----------
         if (["ausente","falta","perdido"].some(p => texto.includes(p))) {
             return this.ejecutarYGuardar(
-                this.perio.marcarAusente(numDiente)
+                this.perio.marcarAusente(numDiente, true)
+            );
+        }
+
+        if (["presente"].some(p => texto.includes(p))) {
+            return this.ejecutarYGuardar(
+                this.perio.marcarAusente(numDiente, false)
             );
         }
 
         // ---------- IMPLANTE ----------
         if (["implante","repuesto","falso"].some(p => texto.includes(p))) {
             return this.ejecutarYGuardar(
-                this.perio.marcarImplante(numDiente)
+                this.perio.marcarImplante(numDiente, true)
+            );
+        }
+
+        if (["original"].some(p => texto.includes(p))) {
+            return this.ejecutarYGuardar(
+                this.perio.marcarImplante(numDiente, false)
             );
         }
 
@@ -97,7 +109,7 @@ class CommandProcessor {
         // ==========================================
         // PROFUNDIDAD DE SONDAJE
         // ==========================================
-        if (cara && numeros.length >= 1 && texto.includes("profundidad")) {
+        if (cara && numeros.length >= 1 && texto.includes("profundidad") || texto.includes("sondaje")) {
 
             let posicion = Object.keys(this.posiciones)
                 .find(p => texto.includes(p));
@@ -138,7 +150,12 @@ class CommandProcessor {
 
             if (grado !== undefined) {
                 return this.ejecutarYGuardar(
-                    this.perio.registrarMovilidad(numDiente, grado)
+                    this.perio.registrarMovilidad(numDiente, grado, "registrar")
+                );
+            }
+            if (grado == undefined && texto.includes("limpiar")) {
+                return this.ejecutarYGuardar(
+                    this.perio.registrarMovilidad(numDiente, 0, "limpiar")
                 );
             }
         }
@@ -152,7 +169,12 @@ class CommandProcessor {
 
             if (grado !== undefined) {
                 return this.ejecutarYGuardar(
-                    this.perio.registrarFurca(numDiente, cara, grado)
+                    this.perio.registrarFurca(numDiente, cara, grado, "registrar")
+                );
+            }
+            if (grado == undefined && texto.includes("limpiar")) {
+                return this.ejecutarYGuardar(
+                    this.perio.registrarFurca(numDiente, cara, 0, "limpiar")
                 );
             }
         }
@@ -266,7 +288,7 @@ class CommandProcessor {
         // ANCHURA DE ENCÍA
         // ========================================== 
         // // Cambiar el orden, si detecta limpiar primero se limpiar, y si no busca el numero
-        if ((texto.includes("encía") || texto.includes("encia")) && numeros.length >= 0) {
+        if ((texto.includes("encía") || texto.includes("encia")) || texto.includes("anchura") && numeros.length >= 0) {
             if (texto.includes("limpiar") || texto.includes("borrar") || texto.includes("eliminar")) {
                 return this.ejecutarYGuardar(
                 this.perio.registrarAnchuraEncia(
