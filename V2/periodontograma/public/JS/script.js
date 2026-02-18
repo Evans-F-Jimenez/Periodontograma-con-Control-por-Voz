@@ -545,7 +545,7 @@ window.onload = async () => {
     const texto = e.results[0][0].transcript.toLowerCase().trim();
     console.log("🎤 Reconocido:", texto);
 
-    if (texto === "terminar") {
+    if (texto === "finalizar") {
       activo = false;
       recognition.stop();
       console.log("🛑 Reconocimiento terminado.");
