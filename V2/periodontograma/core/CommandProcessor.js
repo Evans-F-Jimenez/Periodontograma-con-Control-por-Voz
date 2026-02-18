@@ -51,7 +51,7 @@ class CommandProcessor {
             .replace(/ /g, '');
 
         // ---------- SALIR ----------
-        if (["salir","terminar","finalizar","cerrar"].some(p => texto.includes(p))) {
+        if (["salir","finalizar","cerrar"].some(p => texto.includes(p))) {
             return "SALIR";
         }
 

@@ -1,3 +1,6 @@
+const { text } = require("express");
+
+
 const formattedDate = new Date().toISOString().split('T')[0];
 
 let ultimoSnapshot = null;
@@ -455,23 +458,6 @@ function actualizarEstadoModelo(num, estado) {
   autoGuardar();
 }
 
-async function guardarPeriodontograma() {
-  try {
-    const res = await fetch(`/api/periodontograma/${periodontogramaId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dientes),
-    });
-
-    const result = await res.json();
-    console.log("Guardado:", result);
-  } catch (err) {
-    console.error("Error guardando:", err);
-  }
-}
-
 function autoGuardar() {
   console.log("🔥 autoGuardar llamado");
 
@@ -540,28 +526,48 @@ window.onload = async () => {
   //refrescarPeriodontograma();
 
   if (SpeechRecognition) {
-    const recognition = new SpeechRecognition();
-    recognition.lang = "es-ES";
-    recognition.interimResults = false;
+  const recognition = new SpeechRecognition();
+  recognition.lang = "es-ES";
+  recognition.interimResults = false;
+  recognition.continuous = false; // importante
 
-    document.getElementById("voz").addEventListener("click", () => {
+  let activo = false;
+
+  document.getElementById("voz").addEventListener("click", () => {
+    if (!activo) {
+      activo = true;
       console.log("🎙️ Escuchando...");
       recognition.start();
-    });
+    }
+  });
 
-    recognition.addEventListener("result", (e) => {
-      const texto = e.results[0][0].transcript;
-      console.log("🎤 Reconocido: " + texto);
-      enviarComando(texto);
-    });
-    recognition.addEventListener("error", (e) => {
-      console.log("⚠️ Error en reconocimiento: " + e.error);
-    });
-    recognition.addEventListener("end", () => {
-      console.log("ℹ️ Reconocimiento finalizado. Puedes hablar de nuevo.");
-    });
+  recognition.addEventListener("result", (e) => {
+    const texto = e.results[0][0].transcript.toLowerCase().trim();
+    console.log("🎤 Reconocido:", texto);
+
+    if (texto === "terminar") {
+      activo = false;
+      recognition.stop();
+      console.log("🛑 Reconocimiento terminado.");
+      return;
+    }
+
+    enviarComando(texto);
+  });
+
+  recognition.addEventListener("end", () => {
+    // Si sigue activo, vuelve a escuchar automáticamente
+    if (activo) {
+      recognition.start();
+    }
+  });
+
+  recognition.addEventListener("error", (e) => {
+    console.log("⚠️ Error:", e.error);
+  });
+
   } else {
-    console.log("⚠️ Tu navegador no soporta SpeechRecognition");
+  console.log("⚠️ Tu navegador no soporta SpeechRecognition");
   }
 
   document.addEventListener("input", (e) => {
@@ -575,39 +581,29 @@ window.onload = async () => {
 
     const valor = Number(e.target.value) || 0;
 
-    // =========================
     // MOVILIDAD
-    // =========================
     if (id.includes("movilidad")) {
       dientes[num].movilidad = valor;
     }
 
-    // =========================
     // ANCHURA ENCÍA
-    // =========================
     if (id.includes("anchura_encia")) {
       dientes[num].anchuraEncia = valor;
     }
 
-    // =========================
     // FURCA VESTIBULAR
-    // =========================
     if (id.includes("furca_v")) {
       if (!dientes[num].vestibular) dientes[num].vestibular = {};
       dientes[num].vestibular.furca = valor;
     }
 
-    // =========================
     // FURCA PALATINO
-    // =========================
     if (id.includes("furca_p")) {
       if (!dientes[num].palatino) dientes[num].palatino = {};
       dientes[num].palatino.furca = valor;
     }
 
-    // =========================
     // MARGEN GINGIVAL VESTIBULAR (mgv)
-    // =========================
     if (id.includes("mgv")) {
       const index = Number(partes[2]);
       if (!dientes[num].vestibular.margenGingival)
@@ -616,9 +612,7 @@ window.onload = async () => {
       dientes[num].vestibular.margenGingival[index] = valor;
     }
 
-    // =========================
     // MARGEN GINGIVAL PALATINO (mgp)
-    // =========================
     if (id.includes("mgp")) {
       const index = Number(partes[2]);
       if (!dientes[num].palatino.margenGingival)
@@ -627,9 +621,7 @@ window.onload = async () => {
       dientes[num].palatino.margenGingival[index] = valor;
     }
 
-    // =========================
     // PROFUNDIDAD VESTIBULAR (psv)
-    // =========================
     if (id.includes("psv")) {
       const index = Number(partes[2]);
       if (!dientes[num].vestibular.profundidadSondaje)
@@ -638,9 +630,7 @@ window.onload = async () => {
       dientes[num].vestibular.profundidadSondaje[index] = valor;
     }
 
-    // =========================
     // PROFUNDIDAD PALATINO (psp)
-    // =========================
     if (id.includes("psp")) {
       const index = Number(partes[2]);
       if (!dientes[num].palatino.profundidadSondaje)
@@ -649,9 +639,7 @@ window.onload = async () => {
       dientes[num].palatino.profundidadSondaje[index] = valor;
     }
 
-    // =========================
     // NIC VESTIBULAR (NV)
-    // =========================
     if (id.includes("NV")) {
       const index = Number(partes[2]);
       if (!dientes[num].vestibular.NIC) dientes[num].vestibular.NIC = [0, 0, 0];
@@ -659,9 +647,7 @@ window.onload = async () => {
       dientes[num].vestibular.NIC[index] = valor;
     }
 
-    // =========================
     // NIC PALATINO (NP)
-    // =========================
     if (id.includes("NP")) {
       const index = Number(partes[2]);
       if (!dientes[num].palatino.NIC) dientes[num].palatino.NIC = [0, 0, 0];
