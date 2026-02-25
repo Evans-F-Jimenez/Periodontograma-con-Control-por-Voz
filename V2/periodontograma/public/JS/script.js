@@ -184,22 +184,29 @@ function setInputValue(id, valor) {
   el.classList.add("filled");
 }
 
-function marcarImplante(num) {
+function marcarImplante(num, estado) {
   const box = document.getElementById(`box-${num}`);
   const info = document.getElementById(`info-${num}`);
 
   if (!box || !info) return;
-
+if (estado = true) {
   box.classList.add("implante");
   info.textContent = "IMP";
+} else if (estado = false) {
+  box.classList.remove("implante");
+  info.textContent = "";
+}
 }
 
-function marcarAusente(num) {
+function marcarAusente(num, estado) {
   const diente = document.getElementById(`box-${num}`)?.closest(".diente");
 
   if (!diente) return;
-
-  diente.classList.add("ausente");
+  if (estado = true) {
+    diente.classList.add("ausente");
+  } else if (estado = false) {
+    diente.classList.remove("ausente");
+  }
 }
 
 function marcarPlaca(num, cara, index, valor) {

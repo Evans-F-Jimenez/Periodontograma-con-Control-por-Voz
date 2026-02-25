@@ -1,4 +1,3 @@
-const { text } = require("express");
 
 class CommandProcessor {
     constructor(perio) {
