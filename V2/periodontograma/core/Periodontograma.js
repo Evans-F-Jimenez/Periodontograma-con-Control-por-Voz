@@ -168,7 +168,7 @@ class Periodontograma {
         return false;
     }
 
-    registrarPlaca(diente, cara, posicion) {
+    registrarPlaca(diente, cara, posicion,accion) {
         if (
             !this.dientes[diente] ||
             this.dientes[diente].ausente ||
@@ -177,8 +177,13 @@ class Periodontograma {
 
         const caraReal = cara === "lingual" ? "palatino" : cara;
 
-        if (posicion >= 0 && posicion < 3) {
+        if (posicion >= 0 && posicion < 3 && accion == "registrar") {
             this.dientes[diente][caraReal].placa[posicion] = true;
+            return true;
+        }
+
+        if (posicion >= 0 && posicion < 3 && accion == "limpiar") {
+            this.dientes[diente][caraReal].placa[posicion] = false;
             return true;
         }
 
