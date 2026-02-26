@@ -150,13 +150,18 @@ class Periodontograma {
         return false;
     }
 
-    registrarSangrado(diente, cara, posicion) {
+    registrarSangrado(diente, cara, posicion, accion) {
         if (!this.dientes[diente] || this.dientes[diente].ausente) return false;
 
         const caraReal = cara === "lingual" ? "palatino" : cara;
 
-        if (posicion >= 0 && posicion < 3) {
+        if (posicion >= 0 && posicion < 3 && accion == "registrar") {
             this.dientes[diente][caraReal].sangrado[posicion] = true;
+            return true;
+        }
+
+        if (posicion >= 0 && posicion < 3 && accion == "limpiar") {
+            this.dientes[diente][caraReal].sangrado[posicion] = false;
             return true;
         }
 

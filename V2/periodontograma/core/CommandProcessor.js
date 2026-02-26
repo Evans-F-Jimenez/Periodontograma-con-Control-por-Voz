@@ -144,7 +144,6 @@ class CommandProcessor {
         // MOVILIDAD
         // ==========================================
         if (texto.includes("movilidad") && numeros.length >= 0) {
-
             const grado = numeros.find(n => n <= 3);
 
             if (grado !== undefined) {
@@ -194,15 +193,24 @@ class CommandProcessor {
 
                 return this.ejecutarYGuardar(
                     tipo === "sangrado"
-                        ? this.perio.registrarSangrado(numDiente, cara, idx)
-                        : this.perio.registrarPlaca(numDiente, cara, idx)
+                        ? this.perio.registrarSangrado(numDiente, cara, idx, "registrar")
+                        : this.perio.registrarPlaca(numDiente, cara, idx, "registrar")
                 );
-            } else {
+            } else if (texto.includes("limpiar") || texto.includes("borrar") || texto.includes("eliminar")) {
 
                 for (let i = 0; i < 3; i++) {
                     tipo === "sangrado"
-                        ? this.perio.registrarSangrado(numDiente, cara, i)
-                        : this.perio.registrarPlaca(numDiente, cara, i);
+                        ? this.perio.registrarSangrado(numDiente, cara, i, "limpiar")
+                        : this.perio.registrarPlaca(numDiente, cara, i, "limpiar");
+                }
+
+                return this.ejecutarYGuardar(true);
+            }
+            else {
+                for (let i = 0; i < 3; i++) {
+                    tipo === "sangrado"
+                        ? this.perio.registrarSangrado(numDiente, cara, i, "registrar")
+                        : this.perio.registrarPlaca(numDiente, cara, i, "registrar");
                 }
 
                 return this.ejecutarYGuardar(true);
@@ -249,7 +257,7 @@ class CommandProcessor {
         // ==========================================
         // NIC
         // ==========================================
-        if ((texto.includes("nic") || texto.includes("insercionclinica")) && cara) {
+        if ((texto.includes("nic") || texto.includes("insercion clinica")) && cara) {
 
             let pos = Object.keys(this.posiciones)
                 .find(p => texto.includes(p));
@@ -288,7 +296,7 @@ class CommandProcessor {
         // ========================================== 
         // // Cambiar el orden, si detecta limpiar primero se limpiar, y si no busca el numero
         if ((texto.includes("encía") || texto.includes("encia")) || texto.includes("anchura") && numeros.length >= 0) {
-            if (texto.includes("limpiar") || texto.includes("borrar") || texto.includes("eliminar")) {
+            if (texto.includes("limpiar encia") || texto.includes("borrar encia") || texto.includes("eliminar encia")) {
                 return this.ejecutarYGuardar(
                 this.perio.registrarAnchuraEncia(
                     numDiente,
