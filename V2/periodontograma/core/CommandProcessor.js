@@ -108,7 +108,7 @@ class CommandProcessor {
         // ==========================================
         // PROFUNDIDAD DE SONDAJE
         // ==========================================
-        if (cara && numeros.length >= 1 && texto.includes("profundidad") || texto.includes("sondaje")) {
+        if (cara && numeros.length >= 1 && ["profundidad","sondaje"].some(p => texto.includes(p))) {
 
             let posicion = Object.keys(this.posiciones)
                 .find(p => texto.includes(p));
@@ -161,7 +161,7 @@ class CommandProcessor {
         // ==========================================
         // FURCA
         // ==========================================
-        if ((texto.includes("furca") || texto.includes("furcación")) && numeros.length >= 0 && cara) {
+        if (["furca","furcación"].some(p => texto.includes(p)) && numeros.length >= 0 && cara) {
 
             const grado = numeros.find(n => n >= 0 && n <= 3);
 
@@ -170,7 +170,7 @@ class CommandProcessor {
                     this.perio.registrarFurca(numDiente, cara, grado, "registrar")
                 );
             }
-            if (grado == undefined && texto.includes("limpiar")) {
+            if (grado == undefined && ["limpiar","borrar","eliminar"].some(p => texto.includes(p))) {
                 return this.ejecutarYGuardar(
                     this.perio.registrarFurca(numDiente, cara, 0, "limpiar")
                 );
@@ -180,7 +180,7 @@ class CommandProcessor {
         // ==========================================
         // SANGRADO / PLACA
         // ==========================================
-        if ((texto.includes("sangrado") || texto.includes("placa")) && cara) {
+        if (["placa","sangrado"].some(p => texto.includes(p)) && cara) {
 
             const tipo = texto.includes("sangrado") ? "sangrado" : "placa";
 
@@ -196,8 +196,8 @@ class CommandProcessor {
                         ? this.perio.registrarSangrado(numDiente, cara, idx, "registrar")
                         : this.perio.registrarPlaca(numDiente, cara, idx, "registrar")
                 );
-            } else if (texto.includes("limpiar") || texto.includes("borrar") || texto.includes("eliminar")) {
-
+            } 
+            else if (["limpiar","borrar","eliminar"].some(p => texto.includes(p))) {
                 for (let i = 0; i < 3; i++) {
                     tipo === "sangrado"
                         ? this.perio.registrarSangrado(numDiente, cara, i, "limpiar")
@@ -220,7 +220,7 @@ class CommandProcessor {
         // ==========================================
         // MARGEN GINGIVAL
         // ==========================================
-        if ((texto.includes("margen") || texto.includes("gingival")) && cara) {
+        if (["margen","gingival"].some(p => texto.includes(p)) && cara) {
 
             let pos = Object.keys(this.posiciones)
                 .find(p => texto.includes(p));
@@ -257,7 +257,7 @@ class CommandProcessor {
         // ==========================================
         // NIC
         // ==========================================
-        if ((texto.includes("nic") || texto.includes("insercion clinica")) && cara) {
+        if (["nic","insercion clinica"].some(p => texto.includes(p)) && cara) {
 
             let pos = Object.keys(this.posiciones)
                 .find(p => texto.includes(p));
@@ -295,8 +295,8 @@ class CommandProcessor {
         // ANCHURA DE ENCÍA
         // ========================================== 
         // // Cambiar el orden, si detecta limpiar primero se limpiar, y si no busca el numero
-        if ((texto.includes("encía") || texto.includes("encia")) || texto.includes("anchura") && numeros.length >= 0) {
-            if (texto.includes("limpiar encia") || texto.includes("borrar encia") || texto.includes("eliminar encia")) {
+        if (["encía","encia","anchura"].some(p => texto.includes(p)) && numeros.length >= 0) {
+            if (["limpiar encia","borrar encia","eliminar encia"].some(p => texto.includes(p))) {
                 return this.ejecutarYGuardar(
                 this.perio.registrarAnchuraEncia(
                     numDiente,
