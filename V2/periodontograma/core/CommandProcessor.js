@@ -161,7 +161,7 @@ class CommandProcessor {
         // ==========================================
         // FURCA
         // ==========================================
-        if (["furca","furcación"].some(p => texto.includes(p)) && numeros.length >= 0 && cara) {
+        if (["furca","furcación","furcacion"].some(p => texto.includes(p)) && numeros.length >= 0 && cara) {
 
             const grado = numeros.find(n => n >= 0 && n <= 3);
 

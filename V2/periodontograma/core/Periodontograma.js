@@ -59,6 +59,10 @@ class Periodontograma {
     // ===============================
 
     guardarJSON() {
+        Object.keys(this.dientes).forEach(num => {
+                this.sanitizarDiente(num);
+            });
+
         fs.writeFileSync(
             this.filePath,
             JSON.stringify(this.dientes, null, 2)
@@ -250,6 +254,36 @@ class Periodontograma {
 
         return file;
     }
+
+sanitizarDiente(num) {
+    const d = this.dientes[num];
+
+    if (!d) return;
+
+    if (d.ausente) {
+
+        d.movilidad = 0;
+        d.anchuraEncia = 0;
+
+        d.vestibular = {
+            placa: [false, false, false],
+            sangrado: [false, false, false],
+            margenGingival: [0, 0, 0],
+            profundidadSondaje: [0, 0, 0],
+            NIC: [0, 0, 0],
+            furca: 0
+        };
+
+        d.palatino = {
+            placa: [false, false, false],
+            sangrado: [false, false, false],
+            margenGingival: [0, 0, 0],
+            profundidadSondaje: [0, 0, 0],
+            NIC: [0, 0, 0],
+            furca: 0
+        };
+    }
+}
 }
 
 module.exports = Periodontograma;
