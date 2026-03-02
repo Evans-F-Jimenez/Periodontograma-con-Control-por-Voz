@@ -463,6 +463,7 @@ function actualizarEstadoModelo(num, estado) {
   dientes[num].implante = estado === "implante";
 
   if (estado === "ausente") {
+    bloquearInputsDiente(num, true);
     dientes[num].movilidad = 0;
     dientes[num].anchuraEncia = 0;
 
@@ -486,9 +487,22 @@ function actualizarEstadoModelo(num, estado) {
 
     limpiarVisualDiente(num);
   }
+  else{
+    bloquearInputsDiente(num, false);
+  }
 
 
   autoGuardar();
+}
+
+function bloquearInputsDiente(num, bloquear) {
+  const diente = document.getElementById(`box-${num}`)?.closest(".diente");
+  if (!diente) return;
+
+  const inputs = diente.querySelectorAll("input");
+  inputs.forEach(input => {
+    input.disabled = bloquear;
+  });
 }
 
 function limpiarVisualDiente(num) {
