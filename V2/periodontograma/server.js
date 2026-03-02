@@ -32,7 +32,7 @@ function obtenerPerio(id = formattedDate) {
 
 // ================= API =================
 
-// 🔹 Procesar comando (texto o voz)
+//  Procesar comando (texto o voz)
 app.post("/api/comando/:id", (req, res) => {
     try {
         const { texto } = req.body;
