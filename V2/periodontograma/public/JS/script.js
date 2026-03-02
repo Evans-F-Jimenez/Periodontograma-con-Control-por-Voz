@@ -427,12 +427,12 @@ function manejarClickDiente(box) {
   let nuevoEstado;
 
   if (estadoActual === "normal") {
-    nuevoEstado = "ausente";
-    diente.classList.add("ausente");
-  } else if (estadoActual === "ausente") {
     nuevoEstado = "implante";
     box.classList.add("implante");
     info.textContent = "IMP";
+  } else if (estadoActual === "implante") {
+    nuevoEstado = "ausente";
+    diente.classList.add("ausente");
   } else {
     nuevoEstado = "normal";
   }
@@ -462,7 +462,48 @@ function actualizarEstadoModelo(num, estado) {
   dientes[num].ausente = estado === "ausente";
   dientes[num].implante = estado === "implante";
 
+  if (estado === "ausente") {
+    dientes[num].movilidad = 0;
+    dientes[num].anchuraEncia = 0;
+
+    dientes[num].vestibular = {
+      placa: [false, false, false],
+      sangrado: [false, false, false],
+      margenGingival: [0, 0, 0],
+      profundidadSondaje: [0, 0, 0],
+      NIC: [0, 0, 0],
+      furca: 0
+    };
+
+    dientes[num].palatino = {
+      placa: [false, false, false],
+      sangrado: [false, false, false],
+      margenGingival: [0, 0, 0],
+      profundidadSondaje: [0, 0, 0],
+      NIC: [0, 0, 0],
+      furca: 0
+    };
+
+    limpiarVisualDiente(num);
+  }
+
+
   autoGuardar();
+}
+
+function limpiarVisualDiente(num) {
+  const diente = document.getElementById(`box-${num}`)?.closest(".diente");
+  if (!diente) return;
+
+  diente.querySelectorAll("input").forEach(i => {
+    i.value = "";
+    i.classList.remove("filled");
+  });
+
+  diente.querySelectorAll(".valor").forEach(v => {
+    v.classList.remove("placa-activa");
+    v.classList.remove("sangrado-activa");
+  });
 }
 
 function autoGuardar() {
