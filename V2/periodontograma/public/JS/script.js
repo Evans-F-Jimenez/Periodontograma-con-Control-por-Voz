@@ -231,28 +231,6 @@ function marcarSangrado(num, cara, index, valor) {
   el.classList.add("sangrado-activa");
 }
 
-async function refrescarPeriodontograma() {
-  try {
-    const res = await fetch(
-      `Data/periodontograma_${periodontogramaId}.json?ts=${Date.now()}`,
-      { cache: "no-store" },
-    );
-    const data = await res.json();
-
-    const snapshot = JSON.stringify(data);
-
-    if (snapshot !== ultimoSnapshot) {
-      console.log("🔄 Cambios detectados en JSON");
-      ultimoSnapshot = snapshot;
-
-      //limpiarPeriodontograma();
-      cargarPeriodontogramaDesdeObjeto(data);
-    }
-  } catch (err) {
-    console.error("Error al refrescar periodontograma", err);
-  }
-}
-
 function cargarPeriodontogramaDesdeObjeto(data) {
   Object.entries(data).forEach(([num, d]) => {
     if (d.ausente) {
@@ -585,7 +563,6 @@ window.onload = async () => {
   inicializarEventosDientes();
 
   await cargarDesdeBackend();
-  //refrescarPeriodontograma();
 
   if (SpeechRecognition) {
   const recognition = new SpeechRecognition();
