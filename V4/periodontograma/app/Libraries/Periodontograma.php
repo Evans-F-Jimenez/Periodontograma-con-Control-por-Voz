@@ -60,9 +60,7 @@ class Periodontograma
     // ===============================
     public function guardarJSON(): void
     {
-        if (!$this->dirty) {
-        return;
-    }
+        
         foreach (array_keys($this->dientes) as $num) {
             $this->sanitizarDiente($num);
         }
@@ -71,8 +69,7 @@ class Periodontograma
             $this->filePath,
             json_encode($this->dientes, JSON_PRETTY_PRINT)
         );
-        
-        $this->dirty = false;
+
         log_message('info', "✔ Autoguardado backend");
     }
 
@@ -112,8 +109,7 @@ class Periodontograma
     {
         if (isset($this->dientes[$diente])) {
             $this->dientes[$diente]["ausente"] = $estado;
-            $this->dirty = true;
-        return true;;
+            return true;
         }
         return false;
     }
@@ -122,8 +118,7 @@ class Periodontograma
     {
         if (isset($this->dientes[$diente])) {
             $this->dientes[$diente]["implante"] = $estado;
-            $this->dirty = true;
-        return true;;
+            return true;
         }
         return false;
     }
@@ -136,8 +131,7 @@ class Periodontograma
 
         if ($posicion >= 0 && $posicion < 3) {
             $this->dientes[$diente][$caraReal]["profundidadSondaje"][$posicion] = $valor;
-            $this->dirty = true;
-        return true;;
+            return true;
         }
 
         return false;
@@ -149,14 +143,12 @@ class Periodontograma
 
         if ($accion === "registrar" && $grado >= 0 && $grado <= 3) {
             $this->dientes[$diente]["movilidad"] = $grado;
-            $this->dirty = true;
-        return true;;
+            return true;
         }
 
         if ($accion === "limpiar") {
             $this->dientes[$diente]["movilidad"] = 0;
-            $this->dirty = true;
-        return true;;
+            return true;
         }
 
         return false;
@@ -170,8 +162,7 @@ class Periodontograma
 
         if ($accion === "registrar" && $grado >= 0 && $grado <= 3) {
             $this->dientes[$diente][$caraReal]["furca"] = $grado;
-            $this->dirty = true;
-        return true;;
+            return true;
         }
 
         return false;
@@ -186,8 +177,7 @@ class Periodontograma
         if ($posicion >= 0 && $posicion < 3) {
             $this->dientes[$diente][$caraReal]["sangrado"][$posicion] =
                 $accion === "registrar";
-            $this->dirty = true;
-        return true;;
+            return true;
         }
 
         return false;
@@ -206,8 +196,7 @@ class Periodontograma
         if ($posicion >= 0 && $posicion < 3) {
             $this->dientes[$diente][$caraReal]["placa"][$posicion] =
                 $accion === "registrar";
-            $this->dirty = true;
-        return true;;
+            return true;
         }
 
         return false;
@@ -221,8 +210,7 @@ class Periodontograma
 
         if ($posicion >= 0 && $posicion < 3) {
             $this->dientes[$diente][$caraReal]["margenGingival"][$posicion] = $valor;
-            $this->dirty = true;
-        return true;;
+            return true;
         }
 
         return false;
@@ -236,8 +224,7 @@ class Periodontograma
 
         if ($posicion >= 0 && $posicion < 3) {
             $this->dientes[$diente][$caraReal]["NIC"][$posicion] = $valor;
-            $this->dirty = true;
-        return true;;
+            return true;
         }
 
         return false;
@@ -251,8 +238,7 @@ class Periodontograma
             $valor >= 0
         ) {
             $this->dientes[$diente]["anchuraEncia"] = $valor;
-            $this->dirty = true;
-        return true;;
+            return true;
         }
 
         return false;
