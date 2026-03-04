@@ -121,20 +121,53 @@ class CommandProcessor
                 );
             }
         }
+        // -------------------
+        // FURCA
+        // -------------------
+        if (str_contains($texto, "furca")) {
+
+            $grado = null;
+            foreach ($numeros as $n) {
+                if ($n <= 3) $grado = $n;
+            }
+
+            if ($grado !== null) {
+                return $this->ejecutarYGuardar(
+                    $this->perio->registrarFurca($numDiente, $cara, $grado, "registrar")
+                );
+            }
+
+            if (str_contains($texto, "limpiar")) {
+                return $this->ejecutarYGuardar(
+                    $this->perio->registrarFurca($numDiente, $cara, 0, "limpiar")
+                );
+            }
+        }
+        //--------------------
+        // Anchura Encia
+        // --------------------
+        if (str_contains($texto, "encia")) {
+
+            if (preg_match('/(\d+)$/', $texto, $valorMatch)) {
+                $valor = intval($valorMatch[1]);
+
+                $this->perio->registrarAnchuraEncia($numDiente, $valor);
+
+                return ["ok" => true, "accion" => "anchura encia"];
+            }
+        }
 
         // ==========================================
         // Aquí debes replicar exactamente los bloques:
         // - PROFUNDIDAD
-        // - FURCA
         // - SANGRADO
         // - PLACA
         // - MARGEN GINGIVAL
         // - NIC
-        // - ENCÍA
         // (idénticos a tu versión JS pero en sintaxis PHP)
         // ==========================================
 
-        return false;
+        return ["ok" => false, "mensaje" => "Comando no reconocido"];
     }
 
     // ===============================
