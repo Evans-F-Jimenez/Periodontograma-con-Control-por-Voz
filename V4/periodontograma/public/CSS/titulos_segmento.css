@@ -1,0 +1,55 @@
+/* ==================== TITULOS Y SEGMENTO ==================== */
+.titulos-fila {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-right: 20px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.titulo {
+  height: 24px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.titulos-segmento {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+  opacity: 60%;
+}
+
+.segmento {
+  height: 24px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.titulos-fila.invertido {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.titulos-segmento.invertido {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.titulo-caras-arcada {
+  position: absolute;
+  right: 8%;   /* Ajusta según separación deseada */
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  font-weight: bold;
+  font-size: 13px;
+  color: #333;
+}

@@ -1,0 +1,63 @@
+/* ================= PERIODONTOGRAMA ================= */
+
+.arcada {
+    margin-bottom: 40px;
+}
+
+.arcada-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-right: 115px;
+    font-size: 1.2em;
+    white-space: nowrap;
+}
+
+.cuadrantes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.fila {
+    border-top: 1px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 22px;
+}
+
+.fila.triple {
+    gap: 2px;
+}
+
+/* Arcada superior: normal */
+#arcada-superior-izquierda .diente,
+#arcada-superior-derecha .diente {
+  display: flex;
+  flex-direction: column; /* filas de arriba hacia abajo */
+}
+
+/* Arcada inferior: invertida verticalmente */
+#arcada-inferior-izquierda .diente,
+#arcada-inferior-derecha .diente {
+  display: flex;
+  flex-direction: column-reverse; /* filas de abajo hacia arriba */
+}
+
+.arcada-wrapper {
+  position: relative;
+  display: flex;
+}
+
+.barra-superior{
+  display: flex;
+  /* justify-content: space-between; */
+  margin-bottom: 4px;
+}
+
+.barra-inferior{
+  display: flex;
+  justify-content: space-between;
+}
