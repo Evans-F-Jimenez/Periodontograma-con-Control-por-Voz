@@ -6,7 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Periodontograma::index');
-$routes->get('periodontograma', 'Periodontograma::index');
+$routes->get('test', 'PerioTest::index');
 
 $routes->group('api', ['namespace' => 'App\Controllers\Api'], function($routes) {
 

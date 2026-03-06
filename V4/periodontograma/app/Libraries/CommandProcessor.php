@@ -11,14 +11,6 @@ class CommandProcessor
         "palatino"   => ["palatino", "palatina", "pala", "lingual", "lingu"],
     ];
 
-    private array $posiciones = [
-        "mesial"  => 0,
-        "centro"  => 1,
-        "central" => 1,
-        "medio"   => 1,
-        "distal"  => 2
-    ];
-
     public function __construct(Periodontograma $perio)
     {
         $this->perio = $perio;
@@ -156,16 +148,168 @@ class CommandProcessor
                 return ["ok" => true, "accion" => "anchura encia"];
             }
         }
+        // ---------------------------
+        // Profundidad de sondaje
+        // ---------------------------
+
+        if (str_contains($texto, "profundidad")) {
+
+            $pos = $this->detectarPosicion($texto);
+
+            if ($pos !== null && preg_match('/(\d+)$/', $texto, $m)) {
+                $valor = intval($m[1]);
+
+                $this->perio->registrarProfundidad(
+                    $numDiente,
+                    $cara,
+                    $pos,
+                    $valor
+                );
+
+                return ["ok"=>true, "accion" => "Profundidad"];
+            }
+        }
+        // ---------------------------
+        // Margen gingival
+        // ---------------------------
+        if (str_contains($texto, "MARGEN")) {
+
+            $pos = $this->detectarPosicion($texto);
+
+            if ($pos !== null && preg_match('/(\d+)$/', $texto, $m)) {
+                $valor = intval($m[1]);
+
+                $this->perio->registrarMargenGingival(
+                    $numDiente,
+                    $cara,
+                    $pos,
+                    $valor
+                );
+
+                return ["ok"=>true, "accion" => "Profundidad"];
+            }
+        }
 
         // ==========================================
-        // Aquí debes replicar exactamente los bloques:
-        // - PROFUNDIDAD
-        // - SANGRADO
-        // - PLACA
-        // - MARGEN GINGIVAL
-        // - NIC
-        // (idénticos a tu versión JS pero en sintaxis PHP)
+        // SANGRADO / PLACA
         // ==========================================
+        if ($this->contiene($texto, ["sangrado","placa"]) && $cara) {
+
+            $tipo = str_contains($texto,"sangrado") ? "sangrado" : "placa";
+
+            $pos = $this->detectarPosicion($texto);
+
+            // ------------------------
+            // LIMPIAR
+            // ------------------------
+            if ($this->contiene($texto, ["limpiar","borrar","eliminar"])) {
+
+                for ($i=0; $i<3; $i++) {
+
+                    if ($tipo === "sangrado") {
+
+                        $this->perio->registrarSangrado(
+                            $numDiente,
+                            $cara,
+                            $i,
+                            "limpiar"
+                        );
+
+                    } else {
+
+                        $this->perio->registrarPlaca(
+                            $numDiente,
+                            $cara,
+                            $i,
+                            "limpiar"
+                        );
+                    }
+                }
+
+                $this->perio->guardarJSON();
+
+                return ["ok"=>true,"accion"=>"limpiar ".$tipo];
+            }
+
+            // ------------------------
+            // REGISTRAR POSICIÓN
+            // ------------------------
+            if ($pos !== null) {
+
+                if ($tipo === "sangrado") {
+
+                    return $this->ejecutarYGuardar(
+                        $this->perio->registrarSangrado(
+                            $numDiente,
+                            $cara,
+                            $pos,
+                            "registrar"
+                        )
+                    );
+
+                } else {
+
+                    return $this->ejecutarYGuardar(
+                        $this->perio->registrarPlaca(
+                            $numDiente,
+                            $cara,
+                            $pos,
+                            "registrar"
+                        )
+                    );
+                }
+            }
+
+            // ------------------------
+            // REGISTRAR TODA LA CARA
+            // ------------------------
+            for ($i=0; $i<3; $i++) {
+
+                if ($tipo === "sangrado") {
+
+                    $this->perio->registrarSangrado(
+                        $numDiente,
+                        $cara,
+                        $i,
+                        "registrar"
+                    );
+
+                } else {
+
+                    $this->perio->registrarPlaca(
+                        $numDiente,
+                        $cara,
+                        $i,
+                        "registrar"
+                    );
+                }
+            }
+
+            $this->perio->guardarJSON();
+
+            return ["ok"=>true,"accion"=>$tipo];
+        }
+            
+            // ------------------------
+            // NIC
+            // ------------------------
+        if (str_contains($texto, "NIC")) {
+
+            $pos = $this->detectarPosicion($texto);
+
+            if ($pos !== null && preg_match('/(\d+)$/', $texto, $m)) {
+                $valor = intval($m[1]);
+
+                $this->perio->registrarNIC(
+                    $numDiente,
+                    $cara,
+                    $pos,
+                    $valor
+                );
+
+                return ["ok"=>true, "accion" => "NIC"];
+            }
+        }
 
         return ["ok" => false, "mensaje" => "Comando no reconocido"];
     }
@@ -193,6 +337,17 @@ class CommandProcessor
                 }
             }
         }
+        return null;
+    }
+    
+    private function detectarPosicion($texto)
+    {
+        if (str_contains($texto, "mesial")) return 0;
+
+        if (str_contains($texto, "centro") || str_contains($texto, "central")) return 1;
+
+        if (str_contains($texto, "distal")) return 2;
+
         return null;
     }
 }
